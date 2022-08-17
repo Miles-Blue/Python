@@ -1,3 +1,5 @@
+import turtle
+
 def comment_example():
     #comment_example receives no arguments
     #it explains how to create a function header
@@ -121,6 +123,74 @@ def program2_15():
     print("The sale price is:", display_price)
 
 def program2_16():
+    #takes three test scores
+    #assigns them to variables
+    test_score1 = float(input("Enter the first test score: "))
+    test_score2 = float(input("Enter the second test score: "))
+    test_score3 = float(input("Enter the third test score: "))
     
+    #calculates the average of said test scores
+    average = (test_score1 + test_score2 + test_score3) / 3.0
+    #ouputs the average
+    print("The average score is:", average)
+    
+def program2_17():
+    #takes number of seconds
+    #outputs it into hours, minutes, and seconds
+    input_seconds = float(input("Enter the number of seconds: "))
+    
+    #turns input into hours, remaining minutes, and remaining seconds
+    total_hours = input_seconds // 3600
+    minutes = (input_seconds // 60) % 60
+    seconds = input_seconds % 60
+    
+    #outputs final answer(s)
+    print("Here is the time in hours, minutes, and seconds: ")
+    print("Hours:", total_hours)
+    print("Minutes:", minutes)
+    print("Seconds:", seconds)
+    
+def program2_18():
+    #gets inputs of future value, interest rate, and number of years
+    future_value = float(input("Enter the desired future value:"))
+    interest_rate = float(input("Enter the annual interest rate:"))
+    years_money = float(input("Enter the number of years the money will grow:"))
+    
+    #calculates amount that needs to be deposited
+    deposit_req = future_value / (1 + interest_rate) ** years_money
+    
+    #outputs deposit
+    print("You will need to deposit: ", end='$')
+    print(format(deposit_req, '.2f'))
+    
+def program2_19():
+    #calculate monthly payment
+    amount_due = 5000.0
+    monthly_payment = amount_due / 12.0
+    print("The monthly payment is", monthly_payment)
+    
+def program2_20():
+    #calculate monthly payment
+    amount_due = 5000.0
+    monthly_payment = amount_due / 12.0
+    print("The monthly payment is ", end='$')
+    print(format(monthly_payment, '.2f'))
+    
+def program2_22():
+    #six different variable number
+    num1 = 127.90
+    num2 = 3465.15
+    num3 = 3.78
+    num4 = 264.82
+    num5 = 88.08
+    num6 = 800.00
+    
+    #prints them in format
+    print(format(num1, '7.2f'),
+          format(num2, '7.2f'),
+          format(num3, '7.2f'),
+          format(num4, '7.2f'),
+          format(num5, '7.2f'),
+          format(num6, '7.2f'), sep='\n')
     
     
