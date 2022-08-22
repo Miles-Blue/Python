@@ -90,9 +90,113 @@ def tip_tax_total():
     print("The total bill is:\t\t", end='$')
     print(format(total_bill, '10.2f'))
     
-  
+def temp_converter():
+    #user inputs desired celsius digit
+    #program converts celsius to fahrenheit
+    #outputs product
+    celsius = float(input("Please enter the degrees Celsius: "))
+    fahrenheit = (9/5 * celsius) + 32
+    print(int(celsius), "degrees celsius is ", fahrenheit, "degrees fahrenheit.")
+    
+def cookie_monster():
+    #user inputs desired cookie output
+    #program calculates ingredients required
+    #ouputs ingredients
+    desired_cookies = float(input("How many cookies do you want to make? "))
+    
+    #assign sugar, butter, and flower to constants
+    SUGAR = .5
+    BUTTER = .3333
+    FLOUR = .9166
+    
+    #calculates cups
+    sugar_cups = desired_cookies * SUGAR
+    butter_cups = desired_cookies * BUTTER
+    flour_cups = desired_cookies * FLOUR
+    #calculates oz
+    sugar_oz = sugar_cups % 8
+    butter_oz = butter_cups % 8
+    flour_oz = flour_cups % 8
+    
+    #outputs result
+    print("For", int(desired_cookies), "you will need:")
+    print(int(sugar_cups / 8), "cup(s)", int(format(sugar_oz, '.0f')), "ounces of sugar.")
+    print(int(butter_cups / 8), "cup(s)", int(format(butter_oz, '.0f')), "ounces of butter.")
+    print(int(flour_cups / 8), "cup(s)", int(format(flour_oz, '.0f')), "ounces of flour.")
+    
+def class_demographic():
+    #user inputs number of males and females enrolled
+    #program calculates percentage of male and females enrolled
+    #outputs percentage
+    females = float(input("Enter the number of females: "))
+    males = float(input("Enter the number of males: "))
+    
+    #calculates total students
+    total_students = females + males
+    
+    #calculates percentage of females and males
+    female_percent = females / total_students
+    male_percent = males / total_students
+    
+    #ouputs percents
+    print("The class consists of", end=' ')
+    print(format(female_percent, '.0%'), "females and",end=' ')
+    print(format(male_percent, '.0%'), "males.")
     
     
+def tortuga_1():
+    #program uses turtle to draw a simple compass
+    #sets up turtle
+    import turtle as tur
+    tur.speed(2)
+    tur.penup()
+    tur.goto(0, 0)
+    tur.pensize(5)
     
+    #draws East to West line
+    tur.goto(200, 0)
+    tur.pendown()
+    tur.goto(-200, 0)
     
+    tur.penup()
     
+    #draws North to South line
+    tur.goto(0, 200)
+    tur.left(90)
+    tur.pendown()
+    tur.goto(0, -200)
+    
+    tur.penup()
+    
+    #draws NE to SW
+    tur.pensize(2)
+    tur.goto(100, 100)
+    tur.right(45)
+    tur.pendown()
+    tur.goto(-100, -100)
+    
+    tur.penup()
+    
+    #draws NW to SE
+    tur.goto(-100, 100)
+    tur.left(90)
+    tur.pendown()
+    tur.goto(100, -100)
+    
+    tur.penup()
+    
+    #types the N, E, S, and W
+    tur.goto(-8, 210)
+    tur.write("N", font=('arial', 20, 'bold'))
+    tur.goto(210, -18)
+    tur.write("E", font=('arial', 20, 'bold'))
+    tur.goto(-8, -240)
+    tur.write("S", font=('arial', 20, 'bold'))
+    tur.goto(-232, -18)
+    tur.write("W", font=('arial', 20, 'bold'))
+    
+    tur.hideturtle()
+    tur.done()
+
+def tortuga_2(): #going to do the house
+    print()
