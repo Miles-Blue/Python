@@ -1,4 +1,5 @@
 def personal_info():
+    #personal info accepts no arguments
     #prints my personal info
     print("Miles Blue")
     print("446 S Nineiron, Wichita, Kansas, 67235")
@@ -6,6 +7,7 @@ def personal_info():
     print("Computer Hardware Engineering")
 
 def total_purchase():
+    #total purchase accepts no arguments
     #takes five different purchase inputs
     item1 = float(input("Please enter a price for your first item:"))
     item2 = float(input("Please enter a price for your second item:"))
@@ -29,6 +31,7 @@ def total_purchase():
     print(format(total, '6.2f'))
 
 def distance_traveled():
+    #distance traveled accepts no arguments
     #distance traveled will determine how far someone has gone
     #based on the speed the user inputs
     #takes speed input and turns it into a float variable
@@ -45,6 +48,7 @@ def distance_traveled():
     print("At", speed, "miles per hour you will travel", hour15, "in 15 hours.")
     
 def sales_tax():
+    #sales tax accepts no arguments
     #takes user input for amount of purchase
     #program computes state and county tax
     #then adds to get the total purchase
@@ -69,6 +73,7 @@ def sales_tax():
     print(format(total_sale, '10.2f'))
     
 def tip_tax_total():
+    #tip tax total accepts no arguments
     #user inputs food cost
     #calculates tip and sales tax
     #outputs cost, tip, tax, and total bill
@@ -91,6 +96,7 @@ def tip_tax_total():
     print(format(total_bill, '10.2f'))
     
 def temp_converter():
+    #temp converter accepts no arguments
     #user inputs desired celsius digit
     #program converts celsius to fahrenheit
     #outputs product
@@ -99,6 +105,7 @@ def temp_converter():
     print(int(celsius), "degrees celsius is ", fahrenheit, "degrees fahrenheit.")
     
 def cookie_monster():
+    #cookie monster accepts no arguments
     #user inputs desired cookie output
     #program calculates ingredients required
     #ouputs ingredients
@@ -125,6 +132,7 @@ def cookie_monster():
     print(int(flour_cups / 8), "cup(s)", int(format(flour_oz, '.0f')), "ounces of flour.")
     
 def class_demographic():
+    #class demographic accepts no arguments
     #user inputs number of males and females enrolled
     #program calculates percentage of male and females enrolled
     #outputs percentage
@@ -145,6 +153,7 @@ def class_demographic():
     
     
 def tortuga_1():
+    #tortuga 1 accepts no arguments
     #program uses turtle to draw a simple compass
     #sets up turtle
     import turtle as tur
@@ -198,5 +207,62 @@ def tortuga_1():
     tur.hideturtle()
     tur.done()
 
-def tortuga_2(): #going to do the house
-    print()
+def tortuga_2():
+    #tortuga 2 accepts no arguments
+    #program uses turtle to draw a house
+    #sets up turtle
+    import turtle as tur
+    tur.hideturtle()
+    tur.penup()
+    tur.pensize(3)
+    tur.goto(-100, -100)
+    tur.pendown()
+    
+    #draws the base square/rectangle of the house
+    tur.fillcolor('#a50b5e')
+    tur.begin_fill()
+    tur.goto(50, -100)
+    tur.goto(50, 70)
+    tur.goto(-100, 70)
+    tur.goto(-100, -100)
+    tur.end_fill()
+    
+    tur.penup()
+    
+    #draws the second wall
+    tur.begin_fill()
+    tur.goto(51, 70)
+    tur.pendown()
+    tur.goto(165, 35)
+    tur.goto(165, -65)
+    tur.goto(51, -100)
+    tur.goto(51, 70)
+    tur.end_fill()
+
+    tur.penup()
+    tur.fillcolor('#ADD8E6')
+    
+    #draws the roof
+    tur.begin_fill()
+    tur.goto(-100, 71)
+    tur.pendown()
+    tur.goto(-25, 140)
+    tur.goto(50, 71)
+    tur.goto(-100, 71)
+    tur.end_fill()
+    
+    tur.penup()
+    
+    #draws the side roof
+    tur.begin_fill()
+    tur.goto(-25, 140)
+    tur.pendown()
+    tur.goto(110, 90)
+    tur.goto(165, 35)
+    tur.goto(50, 70)
+    tur.goto(-25, 140)
+    tur.end_fill()
+    
+    tur.done()
+    
+    
