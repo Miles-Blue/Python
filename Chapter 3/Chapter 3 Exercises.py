@@ -206,7 +206,163 @@ def leap_year():
     else:
         print(years, "is not a valid number.")
         
+def sir_fix_alot():
+    #sir fix alot accepts no arguments
+    #program goes through many steps to determine user's problem
+    #user responds using yes or no
+    
+    #named constants
+    WRONG = "That's not a valid answer silly billy."
+    PROBLEM = "Did that fix the problem? "
+    FIXED = "Netflix and Chill"
+    
+    #inputs and varables
+    print("Reboot computer and try to connect.")
+    reb_comp = input(PROBLEM)
+    
+    if reb_comp.upper() == 'YES':
+        print(FIXED)
+    elif reb_comp.upper() == 'NO':
+        print("Reboot router and try to connect.")
+        reb_router = input(PROBLEM)
+        if reb_router.upper() == 'YES':
+            print(FIXED)
+        elif reb_router.upper() == 'NO':
+            print("Verify cables are firmly attached.")
+            cable_att = input(PROBLEM)
+            if cable_att.upper() == 'YES':
+                print(FIXED)
+            elif cable_att.upper() == 'NO':
+                print("Move router to a better location.")
+                router_loc = input(PROBLEM)
+                if router_loc.upper() == 'YES':
+                    print(FIXED)
+                elif router_loc.upper() == 'NO':
+                    print("Get a new router.")
+                else:
+                    print(WRONG)
+            else:
+                print(WRONG)
+        else:
+            print(WRONG)
+    else:
+        print(WRONG)
+        
+def can_we_just_eat():
+    #can we just eat accepts no arguments
+    #prompts user to input yes or no in three different categories
+    #determines a restaurant based on inputs
+    
+    #defines different restaurants as print statements
+    def JOE():
+        print("Joe's Gourmet Burgers")
+    def MAIN():
+        print("Main Street Pizza Company")
+    def CORNER():
+        print("Corner Café")
+    def MAMA():
+        print("Mama's Fine Italian")
+    def CHEF():
+        print("The Chef's Kitchen")
+    
+    #gets user input
+    #assigns to variables
+    vegeta = input("Is anyone in your party a vegetarian? (yes/no)")
+    vegan = input("Is anyone in your party a vegan? (yes/no)")
+    gluten = input("Is anyone in your party gluten intolerant? (yes/no)")
+    
+    overall = str(vegeta + vegan + gluten)
+    
+    print("Here are your restaurant choices:")
+    
+    #determines restaurants based on user input
+    if overall.upper() == 'NONONO':
+        JOE()
+        MAIN()
+        CORNER()
+        MAMA()
+        CHEF()
+    elif overall.upper() == 'YESNOYES':
+        MAIN()
+        CORNER()
+        CHEF()
+    elif overall.upper() == 'YESNONO':
+        CORNER()
+        MAMA()
+        CHEF()
+    elif vegeta.upper() != 'YES' and vegeta.upper() != 'NO':
+        print("Please put 'yes' or 'no' for vegetarian.")
+    elif vegan.upper() != 'YES' and vegan.upper() != 'NO':
+        print("Please put 'yes' or 'no' for vegan.")
+    elif gluten.upper() != 'YES' and gluten.upper() != 'NO':
+        print("Please put 'yes' or 'no' for gluten intolerance.")
+    else:
+        CORNER()
+        CHEF()
+    
+def hit_the_target():
+    #hit the target accepts no arguments
+    #user inputs a direction to aim turtle
+    #turtle goes forward and if it hits target, congrats
+    
+    
+    #Named constants
+    SCREEN_WIDTH = 600
+    SCREEN_HEIGHT = 600
+    TARGET_LLEFT_X = 100
+    TARGET_LLEFT_Y = 250
+    TARGET_WIDTH = 25
+    FORCE_FACTOR = 30
+    PROJECTILE_SPEED = 1
+    NORTH = 90
+    SOUTH = 270
+    EAST = 0
+    WEST = 180
+    
+    #set up turtle
+    import turtle as tur
+    tur.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
+    
+    #Draw the target
+    tur.hideturtle()
+    tur.speed(0)
+    tur.penup()
+    tur.goto(TARGET_LLEFT_X, TARGET_LLEFT_Y)
+    tur.pendown()
+    tur.setheading(EAST)
+    tur.forward(TARGET_WIDTH)
+    tur.setheading(NORTH)
+    tur.forward(TARGET_WIDTH)
+    tur.setheading(WEST)
+    tur.forward(TARGET_WIDTH)
+    tur.setheading(SOUTH)
+    tur.forward(TARGET_WIDTH)
+    tur.penup()
+    
+    #resets turtle position
+    tur.goto(0, 0)
+    tur.setheading(EAST)
+    tur.pendown()
 
+    #user inputs angle and force
+    angle = float(input("Enter the desired angle: "))
+    force = float(input("Enter the desired force: "))
+
+    #calculates the distance
+    distance = force * FORCE_FACTOR
+    
+    #moves the turtle
+    tur.left(angle)
+    tur.forward(distance)
+    
+    #determines where the turtle lands and
+    #determines if it landed in the target
+    if tur.xcor() >= 100 and tur.xcor() <= 125\
+    and tur.ycor() >= 250 and tur.ycor() <= 275:
+        print("You hit the target!")
+    else:
+        print("You missed the target!")
+    tur.done()
     
     
     
