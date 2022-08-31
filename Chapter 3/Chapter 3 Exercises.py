@@ -69,13 +69,13 @@ def color_mixer():
     color2 = input("Enter your second primary color: ")
     
     #determines color output
-    if (color1 == RED and color2 == BLUE) or (color1 == BLUE and color2 == RED):
+    if (color1.lower() == RED and color2.lower() == BLUE) or (color1.lower() == BLUE and color2.lower() == RED):
         print("Your color is purple.")
-    elif (color1 == RED and color2 == YELLOW) or (color1 == YELLOW and color2 == RED):
+    elif (color1.lower() == RED and color2.lower() == YELLOW) or (color1.lower() == YELLOW and color2.lower() == RED):
         print("Your color is orange.")
-    elif (color1 == YELLOW and color2 == BLUE) or (color1 == BLUE and color2 == YELLOW):
+    elif (color1.lower() == YELLOW and color2.lower() == BLUE) or (color1.lower() == BLUE and color2.lower() == YELLOW):
         print("Your color is green.")
-    elif (color1 == color2):
+    elif (color1.lower() == color2.lower()):
         print("You should know that makes", color1)
     else:
         print("That is not a valid color.")
@@ -343,6 +343,7 @@ def hit_the_target():
     tur.goto(0, 0)
     tur.setheading(EAST)
     tur.pendown()
+    tur.speed(PROJECTILE_SPEED)
 
     #user inputs angle and force
     angle = float(input("Enter the desired angle: "))
@@ -357,16 +358,26 @@ def hit_the_target():
     
     #determines where the turtle lands and
     #determines if it landed in the target
+    #if missed, outputs tips accordingly
     if tur.xcor() >= 100 and tur.xcor() <= 125\
     and tur.ycor() >= 250 and tur.ycor() <= 275:
         print("You hit the target!")
     else:
         print("You missed the target!")
+        if angle < 64:
+            print("Try a steeper angle!")
+        elif angle > 70:
+            print("Try a more gentle angle!")
+        elif force < 9.1:
+            print("Try more force!")
+        elif force > 10.2 or tur.ycor() > 275:
+            print ("Try less force!")
     tur.done()
     
     
-    
-    
+#bottom right 64 and 9.4
+#top left 70 and 9.9
+#bottom left 68 and 9.1
     
     
     
