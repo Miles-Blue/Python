@@ -165,28 +165,152 @@ def sum_numbers():
         total += number
     print("The total of your", MAX, "numbers is: ", total)
 
-def property_tax():
+#def property_tax():
     #property tax accepts no arguments
     #it prompts the user for a lot number and loops while lot number != 0
     #promts the user for the property value
     #and calculates the property tax=value*PROP_TAX@.0065
     
-    TAX = .0065
+   # TAX = .0065
     
-    end = input("Please enter a lot number (enter 0 to end): ")
+   # end = input("Please enter a lot number (enter 0 to end): ")
     
-    while end != 0:
-        value = float(input("Please enter the property value: "))
+    #while end != 0:
+        #value = float(input("Please enter the property value: "))
         
+def gross_pay():
+    #gross pay accepts no arguments
+    #it takes input from the user in the form of hours worked and pay rate
+    #it calculates and outputs the gross pay
     
+    hours = int(input("Enter the number of hours worked for 1 week: "))
     
+    pay_rate = int(input("Enter the hoursly rate: "))
     
+    gross_pays = hours * pay_rate
     
+    #Output gross pay
+    print("Gross pay: $", format(gross_pays, '.2f'), sep=(' '))
+
+def retail_no_validation():
     
+    MARK_UP = 1.25
+    another = 'y'
     
+    while another == 'y' or another == 'Y':
+        wholesale = float(input("Enter the wholesale cost: "))
+        
+        retail = wholesale * MARK_UP
+        
+        print("Retail price: $", format(retail, '.2f'), sep=(' '))
+        
+        another = input("Do you want to enter another item?" +
+                        "(Enter y for yes)")
+        
+def retail_with_validation():
     
+    MARK_UP = 1.25
+    another = 'y'
     
+    while another == 'y' or another == 'Y':
+        wholesale = float(input("Enter the wholesale cost: "))
+        
+        #validates that number is greater than 0
+        while wholesale < 0:
+            wholesale = float(input("Please enter a number greater than 0: "))
+            
+        retail = wholesale * MARK_UP
+        
+        print("Retail price: $", format(retail, '.2f'), sep=(' '))
+        
+        another = input("Do you want to enter another item?" +
+                        "(Enter y for yes or n for no)")
+
+
+def test_score_average():
+    #test score average accepts no arguments
+    #prompts user to input # of students and # of scores per student
     
+    student = int(input("How many students? "))
+    tests = int(input("How many tests per student? "))
     
+    for student in range(1, student + 1):
+        total = 0.0
+        
+        print("Student number", student)
+        print("--------------")
+        for test in range(1, tests + 1):
+            print("Test number", test, end=' ')
+            score = int(input(": "))
+            total += score
+            
+        avg_tests = total / tests
+        print("The average for student number", student, "is: ", format(avg_tests, '.2f'))
+        print()
+        
+def rectangle_pattern():
+    #rectangle pattern accepts no arguments
+    #prompts user to enter a # of rows and columns
     
+    rows = int(input("Enter the number of rows to print: "))
+    columns = int(input("Enter the number of columns ot print: "))
     
+    for row in range(rows):
+        for col in range(columns):
+            print('*', end='')
+        print()
+    
+def triangle_pattern():
+    
+    start = 1
+    stop = int(input("Enter the base size of the triangle: "))
+    
+    for num in range(start, stop+1):
+        print('*' * num)
+        
+
+def stair_pattern():
+    
+    start = 0
+    stop = int(input("Enter the number of stairs: "))
+    
+    #for num in range(start, stop+1):
+        #print('\t' * num, '*')
+    for num in range(start, stop+1):
+        for num2 in range(start, num):
+            print(' ', '*')
+
+def concentric_circles():
+    import turtle as tur
+    num_circles = int(input("Enter the number of circles: "))
+    STARTING_RADIUS = 20
+    OFFSET = 10
+    ANIMATION_SPEED = 0
+    tur.speed(ANIMATION_SPEED)
+    radius = STARTING_RADIUS
+      
+    for circle in range(num_circles):
+        tur.circle(radius)
+        tur.penup()
+        tur.right(90)
+        tur.forward(OFFSET)
+        tur.left(90)
+        tur.pendown()
+        radius += OFFSET
+    tur.done()
+    
+def spiral_circles():
+    
+    import turtle as tur
+    
+    NUM_CIRCLES = 36
+    RADIUS = 100
+    ANGLE = 10
+    
+    for x in range(NUM_CIRCLES):
+        tur.circle(RADIUS)
+        tur.left(10)
+
+
+
+
