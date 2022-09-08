@@ -63,14 +63,128 @@ def pennies():
         day += 1
         print(day, "\t\t", "$" + format(.01 * factor, '.2f'))
     
+def hogwarts_tuition():
+    #accepts no arguments
+    #calulates yearly tuition for each year of inflation
     
+    #sets named constants
+    YEARS = 5
+    SEMESTER_TUITION = 8000
+    INFLATION = 1.03
     
+    year_tuition = float(SEMESTER_TUITION * 2)
     
+    #prints format for chart
+    print("Year \t\t Tuition Cost")
+    print("------------------------------")
     
+    #determines expected tuition with inlfation per year
+    for year in range(1, YEARS+1):
+        inflated_tuition = year_tuition * INFLATION
+        print(year, "\t\t $", format(inflated_tuition , '.2f'))        
+        year_tuition = inflated_tuition
     
+def population():
+    #accepts no arguments
+    #prompts user for starting population, daily growth, and days
+    #program then calculates for increasing population
     
+    #takes user input and validates it
+    population = float(input("Enter the starting population: "))
+    while population < 0: #validates user input
+        print("Please enter a population more than 0.")
+        population = float(input("Enter the starting population: "))
+
+    growth = float(input("Enter the percent of daily growth: "))
+    while growth < 0: #validates user input
+        print("Please enter more than 0 percent.")
+        growth = float(input("Enter the percent of daily growth: "))
+    growth_percent = (growth / 100) + 1
+
+    days = int(input("Enter the number of days to simulate: "))
+    while days < 1: #validates user input
+        print("Please enter more than 0 days.")
+        days = int(input("Enter the number of days to simulate: ")) 
     
+    #prints format for chart
+    print("Year \t\t Tuition Cost")
+    print("------------------------------")
     
+    for day in range(days):
+        if day == 0:
+            print(day+1, "\t\t", population)  
+        else:
+            projected = float(population * growth_percent)
+            print(day+1, "\t\t", round(projected, day))       
+            population = projected
+    
+def reverse_triangle():
+    #accepts no arguments
+    #prompts user to input desired size for a triangle
+    #program prints an upside down triangle
+    
+    #prompts user for base size
+    base = int(input("Enter the base size of the triangle: "))
+    while base < 0: #validates user input
+        print("Please enter a size higher than 0.")
+        base = int(input("Enter the base size of the triangle: "))
+
+        
+    #outputs desired triangle, upside down
+    for num in range(base, 0, -1):
+        print('*' * num)
+    
+def stair_pattern2():
+    #accepts no arguments
+    #prompts user for desired number of steps
+    #outputs a gradual widening of steps seen as @
+    
+    #prompts user for number of steps
+    stairs = int(input("Enter the number of stairs: "))
+    while stairs < 0: #validates user input
+        print("Please enter more than 0 stairs.")
+        stairs = int(input("Enter the number of stairs: "))
+
+    #outputs desired number of stairs
+    for stair in range(stairs):
+        print('@' + ' ' * stair + '@')
+    
+def repeating_squares():
+    #accepts no arguments
+    #prompts user for number of squares
+    #repeatedly draws that amount with an increasing rate
+    
+    INCREASE = 5
+    BASE_SQUARE = 10
+    
+    #setup turtle
+    import turtle as tur
+    tur.speed(0)
+    tur.goto(0,0)
+    
+    #gets user input
+    squares = int(input("Enter desired number of squares: "))
+    while squares < 0:
+        print("Please enter more than 0 squares.")
+        squares = int(input("Enter desired number of squares: "))
+        
+    #centers the square
+    start_point = (squares * INCREASE + 20) / 2
+    tur.penup()
+    tur.forward(start_point)
+    tur.right(90)
+    tur.forward(start_point)
+    tur.left(90)
+    tur.pendown()
+    
+    for square in range(1, squares+1):
+        bigger = BASE_SQUARE + (INCREASE * square)
+        for num in range(4):
+            tur.left(90)
+            tur.forward(bigger)
+    tur.done()
+    
+
     
     
     
