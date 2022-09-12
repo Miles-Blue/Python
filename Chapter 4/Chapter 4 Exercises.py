@@ -184,8 +184,31 @@ def repeating_squares():
             tur.forward(bigger)
     tur.done()
     
-
+def hypnotic_pattern():
+    #accepts no arguments
+    #prompts user to input number of swirls
+    #program then outputs a swirl via turtle
     
+    base_length = 5
+    
+    #sets up turtle
+    import turtle as tur
+    tur.goto(0, 0)
+    tur.left(90)
+    tur.speed(0)
+    
+    #takes user input
+    swirls = int(input("Enter a number of swirls: "))
+    while swirls < 0:
+        print("Please enter a number greater than 0.")
+        swirls = int(input("Enter a number of swirls: "))
+
+    #prints out pattern
+    for swirl in range(swirls):
+        tur.forward(base_length)
+        tur.left(90)
+        base_length += 5
+    tur.done()
     
     
     
