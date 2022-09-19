@@ -1,6 +1,7 @@
 import math
 import turtle as tur
 import my_graphics
+import random
 
 # ---------------------------------------------- #
 
@@ -158,21 +159,88 @@ def class_c():
 
 # ---------------------------------------------- #
 
-#def paint_estimator():
+def paint_estimator():
     #accepts no arguments
     #calls on paint_gallons and labor_cost
     #outputs total cost
     
-#def paint_gallons():
+    feet = square_feet_paint() #assigns feet to a variable
+    gallons = feet / 112 #calculates gallons
+    paint_cost = paint_gallons(math.ceil(gallons)) #gets paint cost
+    
+    labor_cost = (feet / 112) * 35 * 8
+    total_cost = paint_cost + labor_cost
+    
+    print("The cost breakdown to paint", feet, "square feet is:")
+    print("------------------------------------------------------")
+    print("Total cost of paint: $", format(paint_cost, '.2f'), sep='')
+    print("Total labor cost: $", format(labor_cost, '.2f'), sep='')
+    print("Total cost of the job is: $", format(total_cost, '.2f'), sep='')
+    
+    
+def square_feet_paint():
     #accepts no arguments
+    #prompts user for total square feet
+    #returns feet
+    
+    feet = float(input("Please enter the total square feet to be painted: "))
+    while feet < 0:
+        feet = float(input("Please enter a number greater than 0: "))
+    return feet
+    
+def paint_gallons(gallons):
+    #accepts gallons for number of gallons
     #prompts user for gallon cost
     #determines total cost of paint
     #returns paint cost
+    
+    cost = float(input("How much is each gallon of paint? "))
+    while cost < 0:
+        cost = float(input("Please enter a number greater than 0: "))
+    paint_cost = gallons * cost
+    return paint_cost
+    
+# ---------------------------------------------- #
 
+def math_quiz():
+    #accepts no arguments
+    #calls get_numbers and loops
+    #loops while user inputs y
+    
+    cont = 'y'
+    
+    while cont == 'y':
+        num1, num2 = get_number() #calls on get number for two random numbers
+        answer = num1 + num2 #determines the real answer
+        
+        #formats the two random numbers into a problem
+        print("\t", format(num1, '3.0f'))
+        print("\t+", format(num2, '3.0f'), sep='')
+        print("\t----")
+        
+        user_answer = int(input("Answer:")) #gets user answer
+        
+        if user_answer == answer: #determines if answer is wrong
+            print("\nYou got it right!")
+        else:
+            print("\nDarn! So close. The actual answer was", answer)
+            
+        cont = input("\nContinue? (y/n)") #continues or ends the loop
+        
+def get_number():
+    #accepts no arguments
+    #generates two random integers from 1-200
+    #returns number
+    
+    num1 = random.randint(1, 200)
+    num2 = random.randint(1, 200)
+    
+    if num1 > num2: #formats num1 and num2
+        return num1, num2
+    else:
+        return num2, num1
 
-
-
-
+# ---------------------------------------------- #
 
 
 
