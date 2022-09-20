@@ -242,12 +242,200 @@ def get_number():
 
 # ---------------------------------------------- #
 
+GRAVITY = 9.8
+SECONDS = 10
 
+def time_loop():
+    #accepts no arguments
+    #loops 10 times
+    #calling falling_distance every time
+    
+    #formats the chart
+    print("Here is the distance an object will fall for 10 seconds")
+    print("-------------------------------------------------------")
+    
+    for second in range(1, SECONDS+1):
+        distance = falling_distance(second)
+        if second == 10:
+            print(second, " sec", format(distance, '14.2f'), "m", sep='')
+        else:
+            print(second, " sec", format(distance, '15.2f'), "m", sep='')
+        
+def falling_distance(time):
+    #accepts time for calculating distance
+    #uses 1/2*gt**2 to determine distance
+    #returns distance
+    
+    distance = ((time ** 2) * GRAVITY )/2
+    return distance
 
+# ---------------------------------------------- #
 
+CHOICES = ["scissors","paper", "rock", "lizard", "spock"]
 
+def game():
+    #accepts no arguments
+    #calls comp_choice for computer choice
+    #calls player_choice for player choice
+    #calls winner to determine the winner
+    
+    cont = "y"
+    
+    while cont.lower() == "y": #repeats until user types n
+        
+        player = player_choice() #calls player choice
+        computer = comp_choice() #calls comp_choice
+        
+        #formats player and computer choice
+        print("\nYou chose.... ", player, ".", sep='')
+        print("\nThe computer chose.... ", computer, '.\n', sep='')
+    
+        winner(player, computer)
+        
+        cont = input("\nPlay again? (y/n) ") #determines whether or not to continue
+        while cont != "y" or cont != "n": #validates input
+            cont = input("Please enter a valid answer.")
+    
+def comp_choice():
+    #accepts no arguments
+    #gets a random choice from list CHOICES
+    #returns computer
+    
+    computer = random.choice(CHOICES)
+    return computer
 
+def player_choice():
+    #accepts no arguments
+    #prompts user to input a choice from list
+    #returns player
+    
+    player = input("Type your weapon of choice (rock, paper, scissors, lizard, spock): ")
+    
+    while not player.lower() in CHOICES: #validates answer
+        print("\nPlease enter a valid answer.\n")
+        player = input("Type your weapon of choice (rock, paper, scissors, lizard, spock):")
+        
+    return player.lower()
+    
+def winner(player, computer):
+    #receives player and computer
+    #determines the winner
+    #outputs who won with the corresponding message
+    
+    #assigns each outcome to a variable
+    scissors_paper = "Scissors cuts paper."
+    scissors_lizard = "Scissors decapitates lizard."
+    
+    paper_rock = "Paper covers rock."
+    paper_spock = "Paper disproves spock."
+    
+    rock_lizard = "Rock crushes lizard."
+    rock_scissors = "Rock crushes scissors."
+    
+    lizard_spock = "Lizard poisons spock."
+    lizard_paper = "Lizard eats paper."
+    
+    spock_scissors = "Spock smashes scissors."
+    spock_rock = "Spock vaporizes rock."
+    
+    if player == "scissors": #scissors
+        if computer == "paper":
+            print("You win!", scissors_paper)
+        elif computer == "lizard":
+            print("You win!", scissors_lizard)
+        elif computer == "rock":
+            print("The computer wins!", rock_scissors)
+        elif computer == "spock":
+            print("The computer wins!", spock_scissors)
+        else:
+            print("It's a tie!")
+            
+    elif player == "paper": #paper
+        if computer == "rock":
+            print("You win!", paper_rock)
+        elif computer == "spock":
+            print("You win!", paper_spock)
+        elif computer == "scissors":
+            print("The computer wins!", scissors_paper)
+        elif computer == "lizard":
+            print("The computer wins!", lizard_paper)
+        else:
+            print("It's a tie!")
+                
+    elif player == "rock": #rock
+        if computer == "lizard":
+            print("You win!", rock_lizard)
+        elif computer == "scissors":
+            print("You win!", rock_scissors)
+        elif computer == "paper":
+            print("The computer wins!", paper_rock)
+        elif computer == "spock":
+            print("The computer wins!", spock_rock)
+        else:
+            print("It's a tie!")
+                
+    elif player == "lizard": #lizard
+        if computer == "spock":
+            print("You win!", lizard_spock)
+        elif computer == "paper":
+            print("You win!", lizard_paper)
+        elif computer == "scissors":
+            print("The computer wins!", scissors_lizard)
+        elif computer == "rock":
+            print("The computer wins!", rock_lizard)
+        else:
+            print("It's a tie!")
+                
+    elif player == "spock": #spock
+        if computer == "scissors":
+            print("You win!", spock_scissors)
+        elif computer == "rock":
+            print("You win!", spock_rock)
+        elif computer == "paper":
+            print("The computer wins!", paper_spock)
+        elif computer == "lizard":
+            print("The computer wins!", lizard_spock)
+        else:
+            print("It's a tie!")
 
+# ---------------------------------------------- #
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
