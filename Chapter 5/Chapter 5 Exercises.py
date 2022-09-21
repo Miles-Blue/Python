@@ -2,6 +2,8 @@ import math
 import turtle as tur
 import my_graphics
 import random
+import circle as cir
+import rectangle as rec
 
 # ---------------------------------------------- #
 
@@ -214,7 +216,7 @@ def math_quiz():
         answer = num1 + num2 #determines the real answer
         
         #formats the two random numbers into a problem
-        print("\t", format(num1, '3.0f'))
+        print("\n\t", format(num1, '3.0f'))
         print("\t+", format(num2, '3.0f'), sep='')
         print("\t----")
         
@@ -281,7 +283,7 @@ def game():
     
     cont = "y"
     
-    while cont.lower() == "y": #repeats until user types n
+    while cont == "y": #repeats until user types n
         
         player = player_choice() #calls player choice
         computer = comp_choice() #calls comp_choice
@@ -289,12 +291,17 @@ def game():
         #formats player and computer choice
         print("\nYou chose.... ", player, ".", sep='')
         print("\nThe computer chose.... ", computer, '.\n', sep='')
-    
-        winner(player, computer)
         
-        cont = input("\nPlay again? (y/n) ") #determines whether or not to continue
-        while cont != "y" or cont != "n": #validates input
-            cont = input("Please enter a valid answer.")
+        if not player in CHOICES: #checks for "cheating"
+            print("The computer wins! You entered an invalid weapon. Cheater!")
+        else:
+            winner(player, computer)
+        
+        cont = input("\nPlay again? (y/n) ").lower() #determines whether or not to continue
+        while cont != "y" and cont != "n": #validates input
+            print("\nPlease enter a valid answer.")
+            cont = input("Play again? (y/n)").lower()
+    print("Thank you for playing")
     
 def comp_choice():
     #accepts no arguments
@@ -311,10 +318,6 @@ def player_choice():
     
     player = input("Type your weapon of choice (rock, paper, scissors, lizard, spock): ")
     
-    while not player.lower() in CHOICES: #validates answer
-        print("\nPlease enter a valid answer.\n")
-        player = input("Type your weapon of choice (rock, paper, scissors, lizard, spock):")
-        
     return player.lower()
     
 def winner(player, computer):
@@ -399,8 +402,90 @@ def winner(player, computer):
             print("It's a tie!")
 
 # ---------------------------------------------- #
+
+SNOWMAN_OFFSET = -50
+def drawSnowman():
+    #accepts no arguments
+    #drawSnowman acts as the main function
+    #that calls on other functions to draw a snowman
+    
+    #formats turtle
+    tur.penup()
+    tur.goto(0, SNOWMAN_OFFSET)
+    tur.pendown()
+    
+    drawBase()
+    drawMidSection()
+    drawHead()
+    
+def drawBase():
+    #accepts no arguments
+    #draws the base of the snowman using circle
+    
+    base = cir.area(5.25) #assigns base to a circle
+    center_offset = base * -2 #gets the center offset
+    
+    #goes to center offset
+    tur.penup()
+    tur.left(90)
+    tur.forward(center_offset)
+    tur.right(90)
+    tur.pendown()
+    
+    tur.circle(base) #draws a circle
+    
+    #centers turtle
+    tur.penup()
+    tur.right(90)
+    tur.forward(center_offset)
+    tur.left(90)
+    tur.pendown()
+    
+def drawMidSection():
+    #accepts no arguments
+    #draws the mid section using circle
+    
+    mid = cir.area(4.5)
+    center_offset = mid * 2
+    
+    tur.circle(mid)
+    
+    #centers turtle
+    tur.penup()
+    tur.left(90)
+    tur.forward(center_offset)
+    tur.right(90)
+    tur.pendown()
     
     
+#def drawArms():
+    #accepts no arguments
+    #draws arms of snowman using line
+    
+def drawHead():
+    #accepts no arguments
+    #draws head of the snowman
+    #with eyes and a mouth
+    
+    head = cir.area(3.75)
+    center_offset = cir.area(4.5) * 2
+    
+    tur.circle(head)
+    
+    #centers turtle
+    tur.penup()
+    tur.left(90)
+    tur.forward(center_offset)
+    tur.right(90)
+    tur.pendown()
+    
+#def drawHat():
+    #accepts no arguments
+    #draws the hat with two rectangles
+    
+#def drawFace():
+    #accepts no arguments
+    #draws eyes, a mouth, and a corncob pipe with smoke
     
     
     
