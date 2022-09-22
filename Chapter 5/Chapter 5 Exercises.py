@@ -1,9 +1,7 @@
 import math
 import turtle as tur
-import my_graphics
+import my_graphics as graph
 import random
-import circle as cir
-import rectangle as rec
 
 # ---------------------------------------------- #
 
@@ -409,83 +407,83 @@ def drawSnowman():
     #drawSnowman acts as the main function
     #that calls on other functions to draw a snowman
     
-    #formats turtle
-    tur.penup()
-    tur.goto(0, SNOWMAN_OFFSET)
-    tur.pendown()
-    
+    tur.speed(0)
     drawBase()
     drawMidSection()
+    drawArms()
     drawHead()
+    drawHat()
+    drawFace()
+    tur.done()
+    
     
 def drawBase():
     #accepts no arguments
     #draws the base of the snowman using circle
     
-    base = cir.area(5.25) #assigns base to a circle
-    center_offset = base * -2 #gets the center offset
-    
-    #goes to center offset
-    tur.penup()
-    tur.left(90)
-    tur.forward(center_offset)
-    tur.right(90)
-    tur.pendown()
-    
-    tur.circle(base) #draws a circle
-    
-    #centers turtle
-    tur.penup()
-    tur.right(90)
-    tur.forward(center_offset)
-    tur.left(90)
-    tur.pendown()
+    graph.circle(0, -100, 85, "white")
     
 def drawMidSection():
     #accepts no arguments
     #draws the mid section using circle
     
-    mid = cir.area(4.5)
-    center_offset = mid * 2
+    graph.circle(0, 50, 65, "white")
     
-    tur.circle(mid)
-    
-    #centers turtle
-    tur.penup()
-    tur.left(90)
-    tur.forward(center_offset)
-    tur.right(90)
-    tur.pendown()
-    
-    
-#def drawArms():
+def drawArms():
     #accepts no arguments
     #draws arms of snowman using line
+    
+    #right arm
+    graph.line(62, 62, 110, 115, "black")
+    graph.line(tur.xcor(), tur.ycor(), tur.xcor(), tur.ycor() + 25, "black")
+    graph.line(tur.xcor(), tur.ycor() - 25, tur.xcor() + 15, tur.ycor() - 35, "black")
+    
+    #left arm
+    graph.line(-62, 62, -110, 75, "black")
+    graph.line(tur.xcor(), tur.ycor(), tur.xcor() - 30, tur.ycor() + 40, "black")
+    graph.line(tur.xcor(), tur.ycor(), tur.xcor() - 7, tur.ycor() + 25, "black")
+    graph.line(tur.xcor() + 7, tur.ycor() - 25, tur.xcor() - 7, tur.ycor() - 30, "black")
     
 def drawHead():
     #accepts no arguments
     #draws head of the snowman
     #with eyes and a mouth
     
-    head = cir.area(3.75)
-    center_offset = cir.area(4.5) * 2
+    graph.circle(0, 160, 45, "white")
     
-    tur.circle(head)
-    
-    #centers turtle
-    tur.penup()
-    tur.left(90)
-    tur.forward(center_offset)
-    tur.right(90)
-    tur.pendown()
-    
-#def drawHat():
+def drawHat():
     #accepts no arguments
     #draws the hat with two rectangles
     
-#def drawFace():
+    graph.square(-45, 205, 15, "black")
+    graph.square(30, 205, 15, "black")
+    graph.square(-30, 205, 60, "black")
+    
+def drawFace():
     #accepts no arguments
     #draws eyes, a mouth, and a corncob pipe with smoke
+    
+    #eyes
+    graph.circle(-15, 175, 5, "black")
+    graph.circle(15, 175, 5, "black")
+    
+    #mouth
+    graph.line(-25, 145, 25, 145, "black")
+    
+    #pipe
+    graph.line(15, 145, 60, 125, "brown")
+    tur.left(60)
+    graph.square(65, 120, 10, "brown")
+    
+    #smoke
+    tur.width(4)
+    graph.line(63, 130, 75, 145, "gray")
+    graph.circle(75, 147, 4, "white")
+    graph.line(75, 145, 90, 155, "gray")
+    graph.circle(90, 157, 4, "white")
+    graph.line(90, 155, 105, 160, "gray")
+    graph.circle(105, 162, 4, "white")
+    graph.line(105, 160, 135, 165, "gray")
     
     
     
