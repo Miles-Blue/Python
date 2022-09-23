@@ -485,45 +485,76 @@ def drawFace():
     graph.circle(105, 162, 4, "white")
     graph.line(105, 160, 135, 165, "gray")
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+# ---------------------------------------------- #
 
-
-
-
-
-
-
-
+def checkerboard():
+    #accepts no arguments
+    #uses my graphics to draw a checkerboard
+    #alternates between black and white
+    
+    #sets turtle speed to instant
+    tur.speed(0)
+    
+    #assigns variables
+    X_COR = -125
+    X_ADD = 50
+    
+    Y_COR = -125
+    Y_ADD = 50
+    
+    #outputs first column
+    for num in range(1, 5+1):
+        if num%2 == 0:
+            graph.square(X_COR, Y_COR, 50, "white")
+        else:
+            graph.square(X_COR, Y_COR, 50, "black")
+        Y_COR += Y_ADD
+    
+    #changes variables for next column
+    X_COR += X_ADD
+    Y_COR -= Y_ADD
+    
+    #outputs second column
+    for num in range(6, 10+1):
+        if num%2 == 0:
+            graph.square(X_COR, Y_COR, 50, "white")
+        else:
+            graph.square(X_COR, Y_COR, 50, "black")
+        Y_COR -= Y_ADD
+    
+    #changes variables for next column
+    X_COR += X_ADD
+    Y_COR += Y_ADD
+    
+    #outputs third column
+    for num in range(1, 5+1):
+        if num%2 == 0:
+            graph.square(X_COR, Y_COR, 50, "white")
+        else:
+            graph.square(X_COR, Y_COR, 50, "black")
+        Y_COR += Y_ADD
+    
+    #changes variables for next column
+    X_COR += X_ADD
+    Y_COR -= Y_ADD
+       
+    #outputs fourth column
+    for num in range(6, 10+1):
+        if num%2 == 0:
+            graph.square(X_COR, Y_COR, 50, "white")
+        else:
+            graph.square(X_COR, Y_COR, 50, "black")
+        Y_COR -= Y_ADD
+    
+    #changes variables for next column
+    X_COR += X_ADD
+    Y_COR += Y_ADD
+    
+    #outputs fourth column
+    for num in range(1, 5+1):
+        if num%2 == 0:
+            graph.square(X_COR, Y_COR, 50, "white")
+        else:
+            graph.square(X_COR, Y_COR, 50, "black")
+        Y_COR += Y_ADD
+    tur.done()
