@@ -218,13 +218,56 @@ def golf_read():
     golf_file.close()
     print("\nAll data retrieved.")
 
+#----------------------------------------------------------------------#
 
+def webpage():
+    #accepts no arguments
+    #prompts user for name and a short description
+    #turns it into a webpage and prints the inputs
+    
+    name = input("Enter your name: ")
+    desc = input("Write a short description of yourself: ")
+    
+    try: #tries to open and write to the html file
+        website = open(f'{name}.html', 'w')
+        website.write(f"<html><head></head><body><center><h1>{name}<h1></center><hr />{desc}<hr /></body></html>")
+    except IOError as err: #IO Error
+        print(err)
+    except Exception: #any unaccounted errors
+        print("ERROR: An error has occured.")
+    finally: #closes the file after the whole program
+        website.close()
 
+#----------------------------------------------------------------------#
 
+def avg_steps():
+    #accepts no arguments
+    #reads from steps.txt
+    #and averages number of steps taken each month
+    #then outputs months and average number of steps
 
+    total_steps = 0.0
+    counter = 0
+    
+    DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    
+    try:
+        steps_file = open('steps.txt', 'r')
+        for days in DAYS_PER_MONTH:
+            for num in range(days):
+                line = steps_file.readline()
+                daily_steps = line.rstrip('\n')
+                total_steps += int(daily_steps)
+                counter += 1
+                average_steps = total_steps / counter
+            print(average_steps)
 
-
-
+    finally:
+        steps_file.close()
+        
+                    
+        
 
 
 
