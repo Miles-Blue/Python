@@ -1,6 +1,5 @@
 import random
 
-
 def line_numbers():
     #accepts no arguments
     #prompts user for file name
@@ -9,6 +8,7 @@ def line_numbers():
     
     counter = 0
     
+    #prompts user for input
     filename = input("Enter the file you wish to read: ")
     
     try: #error checking
@@ -30,6 +30,7 @@ def line_counter():
     
     total = 0
     
+    #prompts user for file input
     filename = input("Enter the file you wish to read: ")
     
     try: #error checking
@@ -51,7 +52,8 @@ def average_of_numbers():
     
     total = 0
     counter = 0
-
+    
+    #prompts user for file input
     numbers_file = open('numbers.txt', 'r')
     
     try: #crash/error checkers
@@ -79,7 +81,7 @@ def ran_num_writer():
     #prompts user for amount of random numbers
     
     error = True
-    random_file = open('ran_number_list.txt', 'r')
+    random_file = open('ran_number_list.txt', 'w')
     
     while error:
         try:
@@ -245,25 +247,35 @@ def avg_steps():
     #reads from steps.txt
     #and averages number of steps taken each month
     #then outputs months and average number of steps
-
-    total_steps = 0.0
-    counter = 0
     
     DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     
-    try:
+    try: #validates file opening and other crashes
         steps_file = open('steps.txt', 'r')
-        for days in DAYS_PER_MONTH:
-            for num in range(days):
+        for index, days in enumerate(DAYS_PER_MONTH): #for every day in the list
+            total_steps = 0.0
+            counter = 0
+            month = MONTHS[index] #uses the same month as the day list
+            for num in range(days): #figures out the average steps of the month
                 line = steps_file.readline()
                 daily_steps = line.rstrip('\n')
                 total_steps += int(daily_steps)
                 counter += 1
                 average_steps = total_steps / counter
-            print(average_steps)
-
-    finally:
+            if len(month) >= 8: #formats the outputs
+                print(f"{month}\t{format(average_steps, ',.2f')} steps")
+            else: #formats the outputs
+                print(f"{month}\t\t{format(average_steps, ',.2f')} steps")
+    except FileNotFoundError as err: #file wasn't found
+        print(err)
+    except IOError as err: #IO Error
+        print(err)
+    except ValueError as err: #Value wasn't an integer
+        print(err)
+    except Exception: #any unaccounted errors
+        print("ERROR: An error has occured.")
+    finally: #closes the file
         steps_file.close()
         
                     
