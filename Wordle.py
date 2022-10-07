@@ -70,13 +70,15 @@ while cont:
         #determines if the answer is correct
         if guess.upper() == answer[0]:
             print(f"\n\n{Style.RESET_ALL}You got it!")
+            break
         
         #stops them when they run out of guesses
         if counter > guesses:
-            print(f"\n\n{Fore.RESET_ALL}You ran out of guesses. The answer was {answer[0]}.")
-    
-    cont = input("Would You like to continue? (y/n) ")
-    if cont.lower() == y:
+            print(f"\n\n{Style.RESET_ALL}You ran out of guesses. The answer was {answer[0]}.")
+            break
+        
+    user_cont = input("Would You like to continue? (y/n) ")
+    if user_cont.lower() == 'y':
         cont = True
     else:
         cont = False
