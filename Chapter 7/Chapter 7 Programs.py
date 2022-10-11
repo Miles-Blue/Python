@@ -1,4 +1,5 @@
 import random
+import matplotlib.pyplot as plt
 
 def IsValid(string):
     if string.isnumeric():
@@ -313,9 +314,49 @@ def random_numbers():
             values[row][col] = random.randint(1, 100)
     print(values)
 
+def main():
+    x_coords = [0, 1, 2, 3, 4]
+    y_coords = [0, 3, 1, 5, 2]
+    
+    plt.plot(x_coords, y_coords, marker = '*')
+    #plt.bar(left_edges, heights)
+    
+    plt.title('Sales by Year')
+    plt.xlabel('Year')
+    plt.ylabel('Sales')
+    
+    plt.grid(True)
+    
+    #plt.xlim(xmin = -1, xmax = 10)
+    #plt.ylim(ymin = -1, ymax = 6)
+    
+    plt.xticks([0, 1, 2, 3, 4], ['2016', '2017', '2018', '2019', '2020'])
+    plt.yticks([0, 1, 2, 3, 4, 5], ['$0m', '$1m', '$2m', '$3m', '$4m', '$5m'])
+    
+    plt.show()
 
-
-
+def pie_chart():
+    #accept no arguments
+    #creates a list of values
+    #and uses matplotlib to plot a pie chart
+    
+    #set values
+    values = [20 ,60, 80, 40]
+    
+    #set slice labels
+    slice_labels = ['1st Qtr', '2nd Qtr', '3rd Qtr', '4th Qtr']
+    
+    #draw the pie chart
+    plt.pie(values, colors=('r', 'g', 'b', 'y', 'k'))
+    
+    #draw the pie chart
+    plt.pie(values, labels=slice_labels)
+    
+    #add a title
+    plt.title('Sales by Quarter')
+    
+    #show the pie chart
+    plt.show()
 
 
 
