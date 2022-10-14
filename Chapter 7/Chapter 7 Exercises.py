@@ -17,7 +17,9 @@ def lottery():
             print(element)
     except Exception as err:
         print(err)
-        
+
+#-----------------------------------------------------------------#
+
 def rainfall():
     #accepts no arguments
     #prompts user for rainfall for specified month
@@ -58,26 +60,165 @@ def rainfall():
     except Exception as err: #Exception handling
         print(err)
 
+#-----------------------------------------------------------------#
+
 def charge_accts():
     #accepts no arguments
     #reads charge_accounts.txt into a list
     #prompts user for an account number
     #compares it to the list and outputs accordingly
     
+    #Accounts_list is assigned an empty list
     accounts_list = []
     
-    try:
-        account_file = open('charge_accounts.txt', 'r')
-        for line in account_file:
-            line = line.rstrip('\n')
-            accounts_list.append(line)
+    #Used for continuation of loop
+    cont = 'y'
+    
+    while cont != 'n': #Keeps running while the user says so
+        try: #Exception Handling
+            #Opens the file
+            account_file = open('charge_accounts.txt', 'r')
             
-        while True:
-            try:
-                user_search = int(input("Enter an account number: "))
-                #valid = 
-            except:
-                print("\nEnter a numeric number only\n")
+            #Copies the file into the list
+            for line in account_file:
+                line = line.rstrip('\n')
+                accounts_list.append(line)
+                
+            #Validates user input
+            while True:
+                try: #Exception Handling for Validation
+                    user_search = int(input("Enter an account number: "))
+                    
+                    #Determines if input is valid
+                    valid = isValid(user_search, accounts_list)
+                    break #Ends the While Loop
+                
+                except: #Numerical Error
+                    print("\nEnter a numeric number only\n")
+            
+            #Prints the Validation Statement
+            print(valid)
+            
+        except Exception as err: #Handles any Errors
+            print(err)
+            
+        finally: #Closes the file
+            account_file.close()
         
-    except Exception as err:
-        print(err)
+        #Prompts user for continuation
+        cont = input("Check another account number? (y/n) ")
+        print()
+        
+def isValid(user_search, accounts_list):
+    #accepts user search as an argument and accounts_list for validation
+    #determines if user search is in the list
+    #if it is, then returns valid, if not, then returns invalid
+    
+    if str(user_search) in accounts_list:
+        valid = "\nThe number is valid.\n"
+    else:
+        valid = "\nThe number is invalid.\n"
+    return valid
+
+#-----------------------------------------------------------------#
+
+def drivers_exam():
+    #accepts no arguments
+    #prompts user to input a file name
+    #determines how many answers they got right by
+    #comparing it to the answer file
+    #outputs accordingly
+            
+    #Continue
+    cont = 'y'
+        
+    while cont.lower() != 'n': #Continues as long as the user says 'y'
+        
+        #Assigns all the blank lists
+        answers = []
+        user_answers = []
+        incorrect_answers = []
+
+        #Starts a counter for correct and incorrect answers
+        correct = 0
+        incorrect = 0
+        
+        try: #Exception handling
+            #Opens the driver key and assigns elements to a list
+            key = open('driver_test_key.txt', 'r')
+            for answer in key:
+                answer = answer.rstrip('\n')
+                answers.append(answer)
+                
+        except Exception as err: #Error
+            print(err)
+            
+        #Prompts user for file they wish to open
+        user_search = input("Please enter the name of the file to read: ")
+        
+        try: #Exception handling
+            #Opens user specified file
+            user_file = open(user_search, 'r')
+            
+            #Assigns elements of the file to a list
+            for line in user_file:
+                line = line.rstrip('\n')
+                user_answers.append(line)
+                
+            user_file.close()
+                
+            #Compares the user answers to the key answers
+            for index in range(len(user_answers)):
+                
+                #If it's correct
+                if user_answers[index] == answers[index]:
+                    correct += 1
+                    
+                #If it's incorrect
+                else:
+                    incorrect += 1
+                    incorrect_answers.append(index+1)
+                    
+            #Ouput as well as formatting
+            print("\nTest grading complete.\n")
+            print(f"You answered {correct} questions correctly out of 20.")
+            print(f"You missed {incorrect} questions. The maximum you could miss to pass is 5.")
+            print()#space
+            
+            #Determines whether or not the user passed
+            if correct >= 15 and incorrect <=5:
+                print("Congragulations, you passed the exam.")
+            else:
+                print("You did not pass, study and try again.")
+            print()#space
+            
+            #Outputs missed answers
+            print("Here are the questions you missed:")
+            print(incorrect_answers)
+            
+            #Prompts the user for coninuation
+            cont = input("\nCheck another test? (y/n) ")
+            print()
+            
+        except Exception as err: #Error
+            print(f"\n{err}\n")
+            cont = input("Check another test? (y/n) ")
+            
+        finally: #Closes the files
+            key.close()
+
+#-----------------------------------------------------------------#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
