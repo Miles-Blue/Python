@@ -209,16 +209,108 @@ def drivers_exam():
 
 #-----------------------------------------------------------------#
 
+def tic_tac_toe():
+    #accepts no arguments
+    #plays out a tic tac toe game until X or O had won
+    #or the game board is filled with no winner
+    
+    #Makes the game board
+    board = [['-','-','-'],
+             ['-','-','-'],
+             ['-','-','-']]
+    
+    #Establishes a counter
+    counter = 0
+    check = 0
+    
+    #Keeps the program running while it's not finished
+    while True:
+        counter += 1
+        check += 1
+        column = random.randint(0,2)
+        row = random.randint(0, 2)
+        
+        #Determines if the option should be X or O
+        if counter % 2 != 0:
+            option = 'X'
+        else:
+            option = 'O'
+        
+        if check > 9 :
+            #Determines if there was a tie
+            stop = game_over(check)
+            if stop:
+                print(board[0])
+                print(board[1])
+                print(board[2])
+            
+                print("It's a draw!")
+                
+                break
+            
+        #Figures a different option if spot not available
+        while board[column][row] != '-':
+            column = random.randint(0, 2)
+            row = random.randint(0, 2)
+        
+        #Replaces the - with the option
+        board[column][row] = option
+        
+        if check >= 4:
+            #Determines if someone has won
+            stop = winner(board)
+            if stop:
+                print(board[0])
+                print(board[1])
+                print(board[2])
+            
+                print(f"{option} wins the match!")
+                
+                break
 
 
+def game_over(check):
+    #accepts board
+    #determines if the board is full
+    #but with no winner
+    
+    if check >= 10:
+        return True
+    else:
+        return False
+    
+def winner(board):
+    #accepts board as an argument
+    #determines if a winner has been reached
+    #if there is a winner, it outputs the message
+    #else it will just return nothing
+    
+    #Each if statement determines if a winner happened
+    if board[0][0] == board[0][1] == board[0][2] != '-':
+        return True
+        
+    elif board[1][0] == board[1][1] == board[1][2] != '-':
+        return True
+        
+    elif board[2][0] == board[2][1] == board[2][2] != '-':
+        return True
 
+    elif board[0][0] == board[1][0] == board[2][0] != '-':
+        return True
 
+    elif board[0][1] == board[1][1] == board[2][1] != '-':
+        return True
 
+    elif board[0][2] == board[1][2] == board[2][2] != '-':
+        return True
 
-
-
-
-
-
-
-
+    elif board[0][0] == board[1][1] == board[2][2] != '-':
+        return True
+    
+    elif board[2][0] == board[1][1] == board[0][2] != '-':
+        return True 
+    
+    else: #Continues the program if not applicable
+        return False
+     
+#-----------------------------------------------------------------#   
