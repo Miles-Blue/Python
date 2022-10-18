@@ -1,4 +1,5 @@
 import random
+from random import sample
 
 def lottery():
     #accepts no arguments
@@ -314,3 +315,146 @@ def winner(board):
         return False
      
 #-----------------------------------------------------------------#   
+
+def white_elephant():
+    #accepts no arguments
+    #uses lists to determine who will be giving a gift
+    #for who in the white elephant gift exchange
+    #outputs the results
+    
+    #Chooses a random place to start
+    numbers = [1, 2, 3]
+    random_start = sample(numbers, 1)
+    random_start_num = random_start[0]
+    
+    #Lists the people in each department
+    dev = ['Julia', 'Oliver', 'Abigail']
+    hr = ['Camden' ,'Kayleigh', 'Cooper', 'Kerrigan']
+    sales = ['Avery', 'Charlotte', 'Elle']
+    
+    #Lists possible partners for each person
+    dev_result = ['Camden' ,'Kayleigh', 'Cooper', 'Kerrigan', 'Avery', 'Charlotte', 'Elle']
+    hr_result = ['Julia', 'Oliver', 'Abigail', 'Avery', 'Charlotte', 'Elle']
+    sales_result = ['Julia', 'Oliver', 'Abigail', 'Camden' ,'Kayleigh', 'Cooper', 'Kerrigan']
+    
+    #Formats the results
+    print("Here are the results:")
+    
+    try: #Exception handling
+        while True: #Continues the sorting
+            
+            #Finds partners for the dev department
+            if random_start_num == 1:
+                for name in dev:
+                    dev_partner = sample(dev_result, 1)
+                    dev_partner_str = dev_partner[0]
+                    print(f"{name} gifts to {dev_partner_str}")
+                    
+                    #Removes partner from all applicable lists
+                    dev_result.remove(dev_partner_str)
+                    if dev_partner_str in hr_result:
+                        hr_result.remove(dev_partner_str)
+                    elif dev_partner_str in sales_result:
+                        sales_result.remove(dev_partner_str)  
+            
+            #Finds partners for the hr department
+            if random_start_num == 2:
+                for name in hr:
+                    hr_partner = sample(hr_result, 1)
+                    hr_partner_str = hr_partner[0]
+                    print(f"{name} gifts to {hr_partner_str}")
+                    
+                    #Removes partner from all applicable lists 
+                    hr_result.remove(hr_partner_str)
+                    if hr_partner_str in dev_result:
+                        dev_result.remove(hr_partner_str)
+                    elif hr_partner_str in sales_result:
+                        sales_result.remove(hr_partner_str)
+
+            #Finds partners for the sales department
+            if random_start_num == 3:
+                for name in sales:
+                    sales_partner = sample(sales_result, 1)
+                    sales_partner_str = sales_partner[0] 
+                    print(f"{name} gifts to {sales_partner_str}")
+                    
+                    
+                    #Removes partner from all applicable lists
+                    sales_result.remove(sales_partner_str)
+                    if sales_partner_str in hr_result:
+                        hr_result.remove(sales_partner_str)
+                    elif sales_partner_str in dev_result:
+                        dev_result.remove(sales_partner_str)
+            
+            #Removes the last number used from the list
+            numbers.remove(random_start_num)
+            
+            #Determines if the loop should continue
+            try:
+                random_start = sample(numbers, 1)
+                random_start_num = random_start[0]
+            except:
+                break
+            
+    except Exception as err: #Error handling
+        print(err)
+
+#-----------------------------------------------------------------#
+
+def magic_8_ball():
+    #accepts no arguments
+    #prompts user for a question
+    #generates a random response from the list created
+    #using 8_ball_responses.txt and outputs it
+
+    responses = []
+    
+    try: #Exception handling
+        
+        #Opens the response file
+        response_file = open('8_ball_responses.txt', 'r')
+        
+        #Adds responses to a list
+        for line in response_file:
+            line = line.rstrip('n')
+            responses.append(line)
+            
+    except Exception as err: #Error handling
+        print(err)
+        
+    try: #Exception handling
+        
+        while True: #Continues the loop
+            
+            #Prompts for a question
+            input("\nWhat is your question? ")
+            
+            #Generates the random response
+            response = sample(responses, 1)
+            print(f"\n{response[0]}\n")
+            
+            #Determines if the user wants to continue
+            cont = input("Do you want to ask another question? (y/n): ")
+            if cont.lower() == 'n':
+                print("Beware the prophecy... Take care.")
+                
+                #Stops the loop
+                break
+            
+    except Exception as err: #Error handling
+        print(err)
+
+#-----------------------------------------------------------------#
+
+
+
+
+
+
+
+
+
+
+
+
+
