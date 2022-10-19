@@ -1,5 +1,6 @@
 import random
 from random import sample
+import matplotlib.pyplot as plt
 
 def lottery():
     #accepts no arguments
@@ -373,11 +374,32 @@ def white_elephant():
 
             #Finds partners for the sales department
             if random_start_num == 3:
+                dev_counter = 0
+                hr_counter = 0
+                
                 for name in sales:
-                    sales_partner = sample(sales_result, 1)
-                    sales_partner_str = sales_partner[0] 
-                    print(f"{name} gifts to {sales_partner_str}")
                     
+                    #No list will be fully used up before another can use it
+                    if dev_counter >= 2:
+                        for dev_name in sales_result:
+                            if dev_name in dev and dev_name in sales_result:
+                                sales_result.remove(dev_name)
+                            
+                    elif hr_counter >= 2:
+                        for hr_name in sales_result:
+                            if hr_name in hr and hr_name in sales_result:
+                                sales_result.remove(hr_name)
+                                
+                    sales_partner = sample(sales_result, 1)
+                    sales_partner_str = sales_partner[0]
+                        
+                    if sales_partner_str in dev:
+                        dev_counter += 1
+                    elif sales_partner_str in hr:
+                        hr_counter += 1
+                    
+                    #Prints the gifters and giftees
+                    print(f"{name} gifts to {sales_partner_str}")
                     
                     #Removes partner from all applicable lists
                     sales_result.remove(sales_partner_str)
@@ -422,6 +444,9 @@ def magic_8_ball():
     except Exception as err: #Error handling
         print(err)
         
+    finally:
+        response_file.close()
+        
     try: #Exception handling
         
         while True: #Continues the loop
@@ -446,15 +471,128 @@ def magic_8_ball():
 
 #-----------------------------------------------------------------#
 
+def monthly_expenses_input():
+    #accepts no arguments
+    #prompts user for information and
+    #saves it to a text file
+    #outputs the date from the file into a pie chart
+    
+    #Formats the inputs
+    print("Input your monthly expenses for the following categories:")
+    
+    #Gets all the inputs from the user
+    rent = input("Rent: ")
+    gas = input("Gas: ")
+    food = input("Food: ")
+    clothing = input("Clothing: ")
+    car = input("Car payment: ")
+    misc = input("Misc: ")
+    
+    try:#Exception handling
+        
+        #Opens Expenses.txt
+        expenses = open('expenses.txt', 'w')
+        
+        #Writes each input to the file
+        expenses.write(rent + '\n')
+        expenses.write(gas + '\n')
+        expenses.write(food + '\n')
+        expenses.write(clothing + '\n')
+        expenses.write(car + '\n')
+        expenses.write(misc + '\n')
+        
+        #Closes the file
+        expenses.close()
+        
+    except Exception as err: #Error handling
+        print(err)
+        
+def monthly_expenses_chart():
+    #accepts no arguments
+    #opens expenses.txt and
+    #writes the contents into a list
+    #outputs the items into a pie chart
+    
+    #Sets a blank list
+    expenses = []
+    
+    #Chart labels
+    expense_labels = ['Rent', 'Gas', 'Food', 'Clothing', 'Car', 'Misc']
+    
+    try:#Exception handling
+        
+        #Opens Expenses
+        expenses_file = open('expenses.txt', 'r')
+        
+        #Appends each item to a list
+        for line in expenses_file:
+            expenses.append(line)
+        
+        #Closes the file
+        expenses_file.close()
+    
+    except Exception as err: #Error handling
+        print(err)
+        
+    #Formats a pie chart with labels and colors
+    plt.pie(expenses, labels=expense_labels)
+    plt.pie(expenses, colors=('blue', 'orange', 'green', 'red', 'purple', 'brown'))
+    
+    #Titles the chart
+    plt.title("Monthly Expenses")
+    
+    #Displays the chart
+    plt.show()
+        
+#-----------------------------------------------------------------#
 
-
-
-
-
-
-
-
-
-
-
-
+def weekly_gas_graph():
+    #accepts no arguments
+    #opens 1996_Weekly_Gas_Averages.txt and
+    #appends each element to a list
+    #then outputs it into a line graph
+    
+    #Sets blank lists
+    gas_prices = []
+    weeks = []
+    
+    try:#Exception handling
+        
+        #Opens the file
+        file = open('1994_Weekly_Gas_Averages.txt', 'r')
+        
+        #Appends file lines into a list
+        for line in file:
+            gas_prices.append(line)
+            
+        #Closes the file
+        file.close()
+        
+    except Exception as err:#Error handling
+        print(err)
+    
+    #Appends numbers to a list
+    for week in range(1, 52+1):
+        weeks.append(week)
+        
+    #Plots the points
+    plt.plot(weeks, gas_prices)
+    
+    #Sets the x and y tick labels
+    plt.xticks(range(0, len(weeks), 10))
+    plt.yticks(gas_prices)
+    
+    #Sets a minimum and maximum for both x and y
+    plt.xlim(xmin = weeks[0], xmax = weeks[-1])
+    plt.ylim(ymin = gas_prices[0], ymax = gas_prices[-1])
+    
+    #Displays the grid
+    plt.grid(True)
+    
+    #Titles the whole graph, as well as the x and y axis
+    plt.title("1994 Weekly Gas Averages")
+    plt.xlabel("Weeks")
+    plt.ylabel("Gas Price/Gallon")
+    
+    #Shows the graph
+    plt.show()
