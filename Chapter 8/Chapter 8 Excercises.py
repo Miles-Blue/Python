@@ -40,7 +40,7 @@ def date_converter():
         
         #Changes the prompt based on if an error happened
         if counter >= 2:
-            user = input("Enter a date valid in the format mm/dd/yyy: ")
+            user = input("Enter a date valid in the format mm/dd/yyyy: ")
         else:
             user = input("Enter a date in the format mm/dd/yyy: ")
         
@@ -125,61 +125,68 @@ def phone_converter():
     #prompts user to input a date in the form of mm/dd/yyyy
     #prints the date in the format of Month Day, Year
     
-    TWO = ['a', 'b', 'c']
-    THREE = ['d', 'e', 'f']
-    FOUR = ['g', 'h', 'i']
-    FIVE = ['j', 'k', 'l']
-    SIX = ['m', 'n', 'o']
-    SEVEN = ['p', 'q', 'r', 's']
-    EIGHT = ['t', 'u', 'v']
-    NINE = ['w', 'x', 'y', 'z']
+    #List of possible numbers
+    num_list = ['2', '2', '2', '3', '3', '3', '4', '4', '4', '5', '5', '5',
+                '6', '6', '6', '7', '7', '7', '7', '8', '8', '8', '9', '9', '9', '9']
     
     #Continues the process
     while True:
         
         user = input("Enter a telphone number in the form of XXX-XXX-XXXX ")
         
-        #Splits the input into a list
-        number_list = user.split('-')
-        
         #Exception handling
         try:
             
             #Handles the formatting for the number
-            if not len(number_list[0]) == 3 and not len(number_list[1]) == 3 and len(number_list[2]) == 4:
+            if user[3] != '-' and user[7] != '-' and user.count('-') != 2:
                 continue
             
-            for number in number_list:
-                for digit in number:
-                    if digit.isalpha():
-                        if digit.lower() in TWO:
-                            number.replace(digit, '2')
-                        elif digit.lower() in THREE:
-                            number.replace(digit, '3')
-                        elif digit.lower() in FOUR:
-                            number.replace(digit, '4')
-                        elif digit.lower() in FIVE:
-                            number.replace(digit, '5')
-                        elif digit.lower() in SIX:
-                            number.replace(digit, '6')
-                        elif digit.lower() in SEVEN:
-                            number.replace(digit, '7')
-                        elif digit.lower() in EIGHT:
-                            number.replace(digit, '8')
-                        elif digit.lower() in NINE:
-                            number.replace(digit, '9')
+            #Replaces the digit if it's a letter
+            for digit in user:
+                if digit.isalpha():
+                    user = user.replace(digit, num_list[ord(digit.lower()) - 97])
             
-            #Outputs the date
-            print(f"\nHere is your converted telephone number: {number_list[0]}-{number_list[1]}-{number_list[2]}")
+            #Outputs the new number
+            print(f"\nHere is your converted telephone number: {user}")
             break #Stops the loop
         
         except:
             continue
 
+#----------------------------------------------------------------------------------------#
 
-
-
-
+def avg_num_words():
+    #accepts no arguments
+    #opens text.txt and counts the number of words
+    #the number of sentences, and the average length of words
+    #and outputs it
+    
+    #Opens the test file
+    try:
+        text_file = open('text.txt', 'r')
+        
+    except Exception as err:
+        print(err)
+    
+    #Formats it into one line
+    string = text_file.read().replace('\n', ' ')
+    
+    #Gets the amount of words and sentences
+    words = string.count(' ') + 1
+    sentences = string.count('.')
+    
+    #Gets the average words per sentence
+    avg_words = words / sentences
+    
+    #Outputs the results
+    print(f"The file text.txt has {words} words.")
+    print(f"There are {sentences} total sentences.")
+    print(f"The average number of words per sentence is: {avg_words:.2f}")
+    
+    #Closes the file
+    text_file.close()
+    
+#----------------------------------------------------------------------------------------#
 
 
 
