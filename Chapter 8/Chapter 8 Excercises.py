@@ -1,3 +1,5 @@
+import re
+
 def sum_of_digits():
     #accepts no arguments
     #prompts user for a list of numbers
@@ -188,11 +190,90 @@ def avg_num_words():
     
 #----------------------------------------------------------------------------------------#
 
+def igpay_atinlay():
+    #accepts no arguments
+    #prompts user for a sentence and outputs it
+    #it then translates it into pig latin and outputs it
+    
+    #User prompt
+    message = input("Enter a message to convert to pig latin: ")
+    
+    #Input validation
+    while any(char.isdigit() for char in message):
+        message = input("Only input letters and words: ")
 
+    #Splits the message into a list
+    message_list = message.split(' ')
+    
+    #For loop to change each word
+    for word in message_list:
+        
+        #Moves the first letter to the end with 'ay'
+        remove_letter = word.replace(word[0], '')
+        new_word = remove_letter + word[0] + 'ay'
+        
+        #Moves the period to the end of the word if there is one
+        if '.' in new_word:
+            new_word = new_word.replace('.', '')
+            new_word += '.'
+        
+        #Gets the index of the word
+        index = message_list.index(word)
+        
+        #Replaces the word
+        message_list[index] = new_word
+    
+    #Formats the output
+    print("Here is your message in pig latin:")
+    
+    #Outputs the translated message in one line
+    for word in message_list:
+        print(word.upper(), end=' ')
 
+#----------------------------------------------------------------------------------------#
 
-
-
+def pb_lottery():
+    #accepts no arguments
+    #opens the text file pbnumbers.txt
+    #counts the amount that each number appears
+    #and outputs the 10 most and least frequent
+    
+    most = [0] * 10
+    pb_most = ['0'] * 10
+    
+    least = [0] * 10
+    pb_least = ['0'] * 10
+    
+    try:
+        pb_file = open('pbnumbers.txt', 'r')
+    except Exception as err:
+        print(err)
+        
+    pb_list = re.findall(r"[\w']+", pb_file.read())
+    
+    for num in range(1, 70):
+        new_num = str(num)
+        counter = pb_list.count(new_num)
+        
+        higher = min(most)
+        lower = max(least)
+        
+        if counter > higher:
+            index = most.index(higher)
+            most[index] = counter
+            pb_most[index] = new_num
+            print('hi')
+            
+        elif counter < lower:
+            index = least.index(lower)
+            least[index] = counter
+            pb_least[index] = new_num
+            print('hello')
+            
+    print(pb_most)
+    print()
+    print(pb_least)
+            
 
 
 
