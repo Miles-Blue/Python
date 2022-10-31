@@ -232,53 +232,70 @@ def igpay_atinlay():
 
 #----------------------------------------------------------------------------------------#
 
-def pb_lottery():
+def pb_main():
     #accepts no arguments
     #opens the text file pbnumbers.txt
     #counts the amount that each number appears
     #and outputs the 10 most and least frequent
     
-    most = [0] * 10
-    pb_most = ['0'] * 10
-    
-    least = [0] * 10
-    pb_least = ['0'] * 10
+    lotto_list = []
     
     try:
         pb_file = open('pbnumbers.txt', 'r')
     except Exception as err:
         print(err)
         
-    pb_list = re.findall(r"[\w']+", pb_file.read())
+    for line in pb_file:
+        line = line.rsplit(' ', 1)[0]
+        lotto_list.append(line)
+    lotto_list = " ".join(lotto_list)
+    print(lotto_list)
+    
+    
+    #Re-assigns the list
+    #pb_list = re.findall(r"[\w']+", pb_file.read())
+    
+    #pb_least = pb_most_common(pb_list)
+    #print(pb_least)
+            
+def pb_frequency(pb_list):
+    #accepts pb_list as an argument
+    #determines the 10 most common numbers, ordered by frequency
+    #outputs the list
+    
+    pb_count = {}
+    
+    for num in range(1, 70):
+        if num < 10:
+            new_num = '0' + str(num)
+        else:
+            new_num = str(num)
+        counter = pb_list.count(new_num)
+        
+        pb_count.append(f"{new_num}: {counter}")
+    return pb_most
+
+def pb_least_common(pb_list):
+    #accepts pb_list as an argument
+    #determines the 10 least common numbers, ordered by frequency
+    #outputs the list
+    
+    least = [100] * 10
+    pb_least = ['0'] * 10
     
     for num in range(1, 70):
         new_num = str(num)
         counter = pb_list.count(new_num)
         
-        higher = min(most)
         lower = max(least)
         
-        if counter > higher:
-            index = most.index(higher)
-            most[index] = counter
-            pb_most[index] = new_num
-            print('hi')
-            
-        elif counter < lower:
-            index = least.index(lower)
-            least[index] = counter
-            pb_least[index] = new_num
-            print('hello')
-            
-    print(pb_most)
-    print()
-    print(pb_least)
-            
+        if counter < lower:
+            if counter != 0:
+                index = least.index(lower)
+                least[index] = counter
+                pb_least[index] = new_num
 
-
-
-
-
+    return pb_least
 
 
 
