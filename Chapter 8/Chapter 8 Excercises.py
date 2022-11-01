@@ -1,5 +1,3 @@
-import re
-
 def sum_of_digits():
     #accepts no arguments
     #prompts user for a list of numbers
@@ -55,7 +53,7 @@ def date_converter():
             #Handles the formatting for the dates
             if not int(date_list[0]) > 0 and not int(date_list[0]) > 0:
                 continue
-            if not int(date_list[2]) > 999:
+            if not int(date_list[2]) > 999 and len(date_list[2]) != 4:
                 continue
             
             #Gets the indext of the month
@@ -238,86 +236,142 @@ def pb_main():
     #counts the amount that each number appears
     #and outputs the 10 most and least frequent
     
+    #Assigns an empty list
     lotto_list = []
     
+    #Tries to open the file
     try:
         pb_file = open('pbnumbers.txt', 'r')
-    except Exception as err:
-        print(err)
         
+    except Exception as err: #Error checking
+        print(err)
+    
+    #Splits the lines and appends them to a list
     for line in pb_file:
         line = line.rsplit(' ', 1)[0]
         lotto_list.append(line)
-    lotto_list = " ".join(lotto_list)
-    print(lotto_list)
+        
+    pb_file.close()
+    
+    #Joins them in the list
+    lotto = " ".join(lotto_list)
+    
+    #Splits them into single letter strings
+    lotto_list = lotto.split(' ')
+    
+    #Calls pb_frequency
+    freq = pb_frequency(lotto_list)
+    
+    #Calls and outputs the most common
+    print("The 10 most frequently occurring lotto numbers:")
+    pb_most_common(freq)
+    
+    #Prints a space
+    print()
     
     
-    #Re-assigns the list
-    #pb_list = re.findall(r"[\w']+", pb_file.read())
-    
-    #pb_least = pb_most_common(pb_list)
-    #print(pb_least)
+    #Calls and outputs the least common
+    print("The 10 least frequently occurring lotto numbers:")
+    pb_least_common(freq)
             
-def pb_frequency(pb_list):
-    #accepts pb_list as an argument
-    #determines the 10 most common numbers, ordered by frequency
+def pb_frequency(lotto_list):
+    #accepts lotto_list as an argument
+    #counts how many times each number appears
+    #sorts them by amount
     #outputs the list
     
-    pb_count = {}
+    #Assigns an empty list
+    lotto_count = []
     
+    #Determines what number to use
     for num in range(1, 70):
         if num < 10:
             new_num = '0' + str(num)
         else:
             new_num = str(num)
-        counter = pb_list.count(new_num)
         
-        pb_count.append(f"{new_num}: {counter}")
-    return pb_most
+        #Counts the number of times the number occurs
+        counter = lotto_list.count(new_num)
+        
+        #Adds the number plus its count to a list
+        lotto_count.append([new_num, counter])
+      
+    #Returns the list sorted
+    return sorted(lotto_count, key=lambda t: t[1])
 
-def pb_least_common(pb_list):
+def pb_most_common(freq):
+    #accepts freq as an argument
+    #determines the 10 most common numbers, ordered by frequency
+    #outputs the list
+    
+    #Gets the most common numbers
+    most_common = freq[-10:]
+    
+    #Outputs the numbers
+    for num in most_common:
+        print(num[0])
+        
+def pb_least_common(freq):
     #accepts pb_list as an argument
     #determines the 10 least common numbers, ordered by frequency
     #outputs the list
     
-    least = [100] * 10
-    pb_least = ['0'] * 10
+    #Gets the least common numbers
+    least_common = freq[:10]
     
-    for num in range(1, 70):
-        new_num = str(num)
-        counter = pb_list.count(new_num)
-        
-        lower = max(least)
-        
-        if counter < lower:
-            if counter != 0:
-                index = least.index(lower)
-                least[index] = counter
-                pb_least[index] = new_num
+    #Outputs the numbers
+    for num in least_common:
+        print(num[0])
 
-    return pb_least
+#----------------------------------------------------------------------------------------#
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def gas_price():
+    #accepts no arguments
+    #opens GasPrices.txt
+    #assigns each line to the list
+    #calls all of the other programs
+    
+    prices_file = open("GasPrices.txt", "r")
+    prices_list = []
+    
+    for line in prices_file:
+        line = line.replace("\n", "")
+        line = line.rsplit(':')
+        prices_list.append(line)
+    
+    avg_price(prices_list)
+    
+    
+def avg_price(prices_list):
+    #accepts prices_list as an argument
+    #gets the average price per year
+    #outputs the average
+    
+    total = 0
+    counter = 0
+    year = 1993
+    
+    new_list = []
+    avg_list = []
+    
+    for item in prices_list:
+        item[0] = item[0].replace(item[0][:-4], "")
+        new_list.append(item)
+    
+    for item in new_list:
+        if item[0] == str(year):
+            total += float(item[1])
+            counter += 1
+        else:
+            average = total / counter
+            
+            avg_list.append([year, round(average, 2)])
+            
+            total = 0
+            counter = 0
+            year += 1
+    for item in avg_list:
+        print(f"The average price in {item[0]} was ${item[1]}")
 
 
 
