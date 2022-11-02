@@ -331,15 +331,57 @@ def gas_price():
     #assigns each line to the list
     #calls all of the other programs
     
-    prices_file = open("GasPrices.txt", "r")
+    #Opens the file
+    try:
+        prices_file = open("GasPrices.txt", "r")
+    except Exception as err:
+        print(err)
+     
+    #Assigns empty lists
     prices_list = []
+    dates_list = []
     
+    #Appends all of the contents to two different lists
     for line in prices_file:
         line = line.replace("\n", "")
         line = line.rsplit(':')
+        dates_list.append(line[0][:-5])
         prices_list.append(line)
+    prices_file.close()
     
-    avg_price(prices_list)
+    #Keeps looping while the user inputs a choice
+    while True:
+        print("\nWhat would you like to do?")
+        print("1) Output Average Price")
+        print("2) Output Highest and Lowest Price per Year")
+        print("3) Print List in Ascending Order to a File")
+        print("4) Print List in Descending Order to a File")
+        print("5) Quit")
+        
+        #Determines if the input is an integer
+        try:
+            user = int(input("Choice: "))
+        except:
+            print("Only enter numbers.")
+            continue
+        
+        #Calls program determined by user
+        if user == 1:
+            avg_price(prices_list)
+        elif user == 2:
+            per_year(prices_list, dates_list)
+        elif user == 3:
+            low_to_high(prices_list)
+        elif user == 4:
+            high_to_low(prices_list)
+        elif user == 5:
+            print("Thank you for using our program!")
+            break
+        
+        #If the number isn't within range
+        else:
+            print("Only enter numbers within 1-5.")
+            continue
     
     
 def avg_price(prices_list):
@@ -365,25 +407,93 @@ def avg_price(prices_list):
         else:
             average = total / counter
             
-            avg_list.append([year, round(average, 2)])
+            avg_list.append([year, format(average, '.2f')])
             
             total = 0
             counter = 0
             year += 1
     for item in avg_list:
-        print(f"The average price in {item[0]} was ${item[1]}")
+        print(f"The average price in {item[0]} was ${item[1]:}")
 
+def per_year(prices_list, dates_list):
+    #accepts prices_list and dates_list as arguments
+    #determines the highest and lowest prices each year
 
+    year = 1993
+    
+    new_list = []
+    high_low = []
+    
+    for item in prices_list:
+        item[0] = item[0].replace(item[0][:-4], "")
+        new_list.append(item)
+    
+    new_list = sorted(new_list, key=lambda t: t[1])
+    new_list = sorted(new_list, key=lambda t: t[0])
+    
+    for item in new_list:
+        if item[0] == str(year):
+            high_low.append(item)
+        else:
+            low = format(float(high_low[0][1]), '.2f')
+            high = format(float(high_low[-1][1]), '.2f')
+            
+            low_index = prices_list.index(high_low[0])
+            high_index = prices_list.index(high_low[-1])
+            
+            print(f"The lowest and highest prices in {item[0]} were on {dates_list[low_index]} with ${low} and on {dates_list[high_index]} with ${high}.")
+            
+            high_low = []
+            
+            year += 1
 
+def low_to_high(prices_list):
+    #accepts prices_list as an argument
+    #sorts the list from lowest to highest by price
+    #prints it all to GasLowToHigh.txt
+    
+    try:
+        file = open('GasLowToHigh.txt', 'a')
+    
+    except Exception as err:
+        print(err)
+    
+    sorted_list = sorted(prices_list, key=lambda t: t[1])
+    
+    for item in sorted_list:
+        item = ':'.join(item)
+    
+    for item in sorted_list:
+        item = str(item).replace(str(item)[0:2], '').replace(str(item)[12:16], ': $').replace(str(item)[-2:], '')
 
+        file.write(item + '\n')
+    
+    print("Printed the list in ascending order to GasLowToHigh.txt.")
+    
+    file.close()
 
+def high_to_low(prices_list):
+    #accepts prices_list as an argument
+    #sorts the list from lowest to highest by price
+    #prints it all to GasHighToLow.txt
+    
+    try:
+        file = open('GasHighToLow.txt', 'a')
+    
+    except Exception as err:
+        print(err)
+    
+    sorted_list = sorted(prices_list, key=lambda t: t[1], reverse=True)
+    
+    for item in sorted_list:
+        item = ':'.join(item)
+    for item in sorted_list:
+        item = str(item).replace(str(item)[0:2], '').replace(str(item)[12:16], ': $').replace(str(item)[-2:], '')
 
-
-
-
-
-
-
+        file.write(item + '\n')
+    
+    print("Printed the list in descending order to GasHighToLow.txt.")
+    file.close()
 
 
     
