@@ -389,62 +389,85 @@ def avg_price(prices_list):
     #gets the average price per year
     #outputs the average
     
+    #Assigns variables
     total = 0
     counter = 0
     year = 1993
     
+    #Sets two blank lists
     new_list = []
     avg_list = []
     
+    #Appends the items without the month and day
     for item in prices_list:
         item[0] = item[0].replace(item[0][:-4], "")
         new_list.append(item)
     
+    #Counts the total and the number of things
     for item in new_list:
         if item[0] == str(year):
             total += float(item[1])
             counter += 1
         else:
+            
+            #Gets the average
             average = total / counter
             
+            #Appends the averages formatted to avg_list
             avg_list.append([year, format(average, '.2f')])
             
+            #Resets the total and counter
             total = 0
             counter = 0
+            
+            #Continues to the next year
             year += 1
+    
+    #Prints the average price of each year
     for item in avg_list:
         print(f"The average price in {item[0]} was ${item[1]:}")
 
 def per_year(prices_list, dates_list):
     #accepts prices_list and dates_list as arguments
     #determines the highest and lowest prices each year
-
+    
+    #Sets the starting year
     year = 1993
     
+    #Sets two blank lists
     new_list = []
     high_low = []
     
+    #Appends each item without month or day to a list
     for item in prices_list:
         item[0] = item[0].replace(item[0][:-4], "")
         new_list.append(item)
     
+    #Sorts it by the money, then by the year
     new_list = sorted(new_list, key=lambda t: t[1])
     new_list = sorted(new_list, key=lambda t: t[0])
     
+    #Appends each money value to the high_low list
     for item in new_list:
         if item[0] == str(year):
             high_low.append(item)
         else:
+            
+            #Gets the lowest value, and the highest value
             low = format(float(high_low[0][1]), '.2f')
             high = format(float(high_low[-1][1]), '.2f')
             
+            #Gets the index of each of these values
             low_index = prices_list.index(high_low[0])
             high_index = prices_list.index(high_low[-1])
             
+            #outputs the highest and lowest prices with their dates
             print(f"The lowest and highest prices in {item[0]} were on {dates_list[low_index]} with ${low} and on {dates_list[high_index]} with ${high}.")
             
+            #Resets the list
             high_low = []
             
+            #Continues to the next year
             year += 1
 
 def low_to_high(prices_list):
@@ -452,24 +475,31 @@ def low_to_high(prices_list):
     #sorts the list from lowest to highest by price
     #prints it all to GasLowToHigh.txt
     
+    #Exception handling
     try:
+        #Opens the file
         file = open('GasLowToHigh.txt', 'a')
     
-    except Exception as err:
+    except Exception as err: #Error handling
         print(err)
     
+    #Sorts the list in ascending order
     sorted_list = sorted(prices_list, key=lambda t: t[1])
     
+    #Joins the items with a colon
     for item in sorted_list:
         item = ':'.join(item)
     
+    #Formats each item and writes it to the file
     for item in sorted_list:
         item = str(item).replace(str(item)[0:2], '').replace(str(item)[12:16], ': $').replace(str(item)[-2:], '')
 
         file.write(item + '\n')
     
+    #Outputs a final message
     print("Printed the list in ascending order to GasLowToHigh.txt.")
     
+    #Closes the file
     file.close()
 
 def high_to_low(prices_list):
@@ -477,22 +507,31 @@ def high_to_low(prices_list):
     #sorts the list from lowest to highest by price
     #prints it all to GasHighToLow.txt
     
+    #Exception handling
     try:
+        #Opens the file
         file = open('GasHighToLow.txt', 'a')
     
-    except Exception as err:
+    except Exception as err: #Error handling
         print(err)
     
+    #Sorts the list in descending order
     sorted_list = sorted(prices_list, key=lambda t: t[1], reverse=True)
     
+    #Joins the items with a colon
     for item in sorted_list:
         item = ':'.join(item)
+    
+    #Formats each item and writes it to the file
     for item in sorted_list:
         item = str(item).replace(str(item)[0:2], '').replace(str(item)[12:16], ': $').replace(str(item)[-2:], '')
 
         file.write(item + '\n')
     
+    #Outputs a final message
     print("Printed the list in descending order to GasHighToLow.txt.")
+    
+    #Closes the file
     file.close()
 
 
