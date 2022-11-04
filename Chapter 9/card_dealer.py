@@ -1,8 +1,22 @@
+import random
+
 def card_dealing_main():
     #card dealer main accepts no arguments
     #it calls create_deck to generate a deck of cards
     #and takes input from the user for the number of cards to deal
     #it then calls deal_cards to deal the number of cards to the user
+    
+    try:
+        number = int(input("How many cards do you wish to be dealt? "))
+    except Exception as err:
+        print(err)
+    
+    deck = create_deck()
+    
+    if number > len(deck):
+        number = len(deck)
+    
+    deal_cards(deck, number)
     
 def create_deck():
     #create deck accepts no arguments
@@ -44,3 +58,19 @@ def deal_cards(deck, number):
     #it reandomly selects and removes a key/value from the deck
     #it prints the card and calculates the value of the hand
     #after all cards have been dealt, it outputs the total value of the hand
+    
+    total = 0
+    
+    print("Here is your hand:\n")
+    
+    for num in range(number):
+        card = random.choice(list(deck))
+        value = deck.pop(card)
+        
+        total += value
+        
+        print(card)
+    
+    print(f"\nYour hand has the value: {total}")
+
+card_dealing_main()
