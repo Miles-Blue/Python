@@ -28,7 +28,7 @@ def read_main():
     
     end_of_file = False
     
-    infile = opne('info.dat', 'rb')
+    infile = open('info.dat', 'rb')
     
     while not end_of_file:
         try:
@@ -41,14 +41,14 @@ def read_main():
 
 def display_data(person):
     
-    print(' Name: ', person['name'])
+    print('Name: ', person['name'])
     print('Age: ', person['age'])
     print('Weight: ', person['weight'])
     print()
     
 def save_data(file):
     
-    person = ()
+    person = {}
     
     person['name'] = input('Name: ')
     person['age'] = int(input('Age: '))
