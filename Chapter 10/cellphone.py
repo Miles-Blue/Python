@@ -27,4 +27,4 @@ class CellPhone:
         return self.__model
     
     def get_retail_price(self):
-        return self.__price
+        return format(self.__price, '.2f')

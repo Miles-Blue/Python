@@ -29,11 +29,19 @@ def main():
 
 def cell_phone():
     
+    valid = False
+    
     print("Welcome to the Galactic Phone Database.")
     
     manu = input("Enter the phone manufacturer: ")
     model = input("Enter the phone model number: ")
-    price = float(input(f"Enter the retail price for your {manu}, model {model}: "))
+    
+    while not valid:
+        try:
+            price = float(input(f"Enter the retail price for your {manu}, model {model}: "))
+            valid = True
+        except:
+            valid = False
     
     info = cellphone.CellPhone(manu, model, price)
     
