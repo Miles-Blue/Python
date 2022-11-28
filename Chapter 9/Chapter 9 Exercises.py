@@ -1,3 +1,5 @@
+import random
+
 def encode():
     #accepts no arguments
     #opens file plaintext.txt and encodes each letter
@@ -171,3 +173,209 @@ def world_series():
     
 #------------------------------------------------------------------------------------------------#    
 
+def blackjack():
+    #accepts no arguments
+    #plays a simplified game of blackjack between two bots
+    #uses different programs to get the deck, pass out cards,
+    #and determine the winner
+    
+    #Calls to create a deck
+    deck = create_deck()
+    
+    #Calls to create a deck
+    deal_cards(deck)
+    
+def create_deck():
+    #create deck accepts no arguments
+    #it generates a dictionary with the name of the card as the key
+    #and the point value of the card as the value
+    #and returns the dictionary of cards
+    
+    deck = {'Ace of Spades' : 1, '2 of Spades' : 2, '3 of Spades' : 3,
+        '4 of Spades' : 4, '5 of Spades' : 5, '6 of Spades' : 6,
+        '7 of Spades' : 7, '8 of Spades' : 8, '9 of Spades' : 9,
+        '10 of Spades' : 10, 'Jack of Spades' : 10, 'Queen of Spades' : 10,
+        'King of Spades' : 10,
+        
+        'Ace of Hearts' : 1, '2 of Hearts' : 2, '3 of Hearts' : 3,
+        '4 of Hearts' : 4, '5 of Hearts' : 5, '6 of Hearts' : 6,
+        '7 of Hearts' : 7, '8 of Hearts' : 8, '9 of Hearts' : 9,
+        '10 of Hearts' : 10, 'Jack of Hearts' : 10, 'Queen of Hearts' : 10,
+        'King of Hearts' : 10,
+        
+        'Ace of Clubs' : 1, '2 of Clubs' : 2, '3 of Clubs' : 3,
+        '4 of Clubs' : 4, '5 of Clubs' : 5, '6 of Clubs' : 6,
+        '7 of Clubs' : 7, '8 of Clubs' : 8, '9 of Clubs' : 9,
+        '10 of Clubs' : 10, 'Jack of Clubs' : 10, 'Queen of Clubs' : 10,
+        'King of Clubs' : 10,
+        
+        'Ace of Diamonds' : 1, '2 of Diamonds' : 2, '3 of Diamonds' : 3,
+        '4 of Diamonds' : 4, '5 of Diamonds' : 5, '6 of Diamonds' : 6,
+        '7 of Diamonds' : 7, '8 of Diamonds' : 8, '9 of Diamonds' : 9,
+        '10 of Diamonds' : 10, 'Jack of Diamonds' : 10, 'Queen of Diamonds' : 10,
+        'King of Diamonds' : 10}
+    
+    return deck    
+    
+def deal_cards(deck):
+    #accepts the deck as an argument
+    #deals cards to each player until one or
+    #both reach above 21
+    
+    #Sets the totals to 0
+    total1 = 0
+    total2 = 0
+    
+    #Establishes blank lists
+    player1 = []
+    player2 = []
+    
+    while True:
+        
+        #Determines if the deck has any more cards
+        if len(deck) == 0:
+            
+            #Determines if a total is above 21
+            if total1 > 21:
+                
+                #Determines if player has an Ace
+                if "Ace" in player1:
+                    total1 -= 10
+                
+                #Determines if there's a draw
+                elif total2 > 21:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("It's a draw!")
+                 
+                #Otherwise the other player wins
+                else:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("Player 2 wins!")
+            
+            #Determines if other player has above 21
+            elif total2 > 21:
+                
+                #Determines if player has an Ace
+                if "Ace" in player2:
+                    total1 -= 10
+                
+                #Determines if other player has above 21
+                elif total1 > 21:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("It's a draw!")
+                 
+                #Otherwise the other player wins
+                else:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("Player 1 wins!")
+            
+            #Accounts for both players having less than 21
+            else:
+                
+                #if player 1 wins
+                if total1 > total2:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("Player 1 wins!")
+                
+                #if player 2 wins
+                elif total2 > total1:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("Player 2 wins!")
+                 
+                #if it's a draw
+                else:
+                    print("\nPlayer 1 total =", total1)
+                    print("Player 2 total =", total2)
+                    print("It's a draw!")
+            
+            #Stops the loop
+            break
+        
+        #Draws a random card for player 1
+        card1 = random.choice(list(deck))
+        
+        #Adds it to player 1 list of cards
+        player1.append(card1[:2])
+        
+        #Removes the card from the dictionary
+        value1 = deck.pop(card1)
+        
+        #Adds it to player 1 total
+        total1 += value1
+        
+        #Determines if player 1 wins, loses, or drew with player 2
+        if total1 > 21:
+            if "Ace" in player1:
+                total1 -= 10
+                
+            elif total2 > 21:
+                print("\nPlayer 1 total =", total1)
+                print("Player 2 total =", total2)
+                print("It's a draw!")
+                
+                total1 = 0
+                total2 = 0
+    
+                player1 = []
+                player2 = []
+                
+            else:
+                print("\nPlayer 1 total =", total1)
+                print("Player 2 total =", total2)
+                print("Player 2 wins!")
+
+                total1 = 0
+                total2 = 0
+    
+                player1 = []
+                player2 = []
+                
+        #Draws a random card for player 2
+        card2 = random.choice(list(deck))
+        
+        #Adds it to player 2 list of cards 
+        player2.append(card2[:2])
+        
+        #Removes the card from the dictionary
+        value2 = deck.pop(card2)
+        
+        #Adds it to player 2 total
+        total2 += value2  
+    
+        #Determines if player 2 wins, loses, or drew with player 1
+        if total2 > 21:
+            if "Ace" in player2:
+                total1 -= 10
+                
+            elif total1 > 21:
+                print("\nPlayer 1 total =", total1)
+                print("Player 2 total =", total2)
+                print("It's a draw!")
+                
+                total1 = 0
+                total2 = 0
+    
+                player1 = []
+                player2 = []
+                
+            else:
+                print("\nPlayer 1 total =", total1)
+                print("Player 2 total =", total2)
+                print("Player 1 wins!")
+                
+                total1 = 0
+                total2 = 0
+    
+                player1 = []
+                player2 = []    
+    
+    
+    
+    
+    
