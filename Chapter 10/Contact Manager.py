@@ -17,19 +17,19 @@ def main():
             delete(my_contacts)
         elif choice == '5':
             save_contacts(my_contacts)
+            break
 
 def load_contacts():
     
-    file = open('contact.dat', 'wb')
-    info = contact.Contact('miles', '316-680-8531', 'milesblue0@gmail.com')
-    pickle.dump(info, file)
-    file.close()
+    contact_list = []
     
     file = open('contact.dat', 'rb')
     
     while True:
         try:
             con = pickle.load(file)
+            
+            contact_list.append(con)
             
         except EOFError:
             break
@@ -39,9 +39,8 @@ def load_contacts():
             break
     
     file.close()
-    print(con)
     
-    return con
+    return contact_list
 
 def get_menu_choice():
     print("\nHere are your choices:")
@@ -51,26 +50,44 @@ def get_menu_choice():
     print("4) Delete a Contact")
     print("5) Exit and Save Contacts to a file")
     
-    choice = input(":: ")
-    while not choice.isnumeric() and 1 <= choice <= 5:
-        choice = input("Choice: ")
+    while True:
+        choice = input(":: ")
+        
+        if not choice.isnumeric():
+            print("\nHas to be a number.\n")
+            continue
+        
+        if not 1 <= int(choice) <= 5:
+            print("\nHas to be between 1 and 5.\n")
+            continue
+        
+        else:
+            break
     
     return choice
 
 def look_up(mycontacts):
     
     while True:
+        name_found = True
+        
         search = input("\nEnter a contact you'd like to search for: ")
         
-        if not search in mycontacts:
-            print("\nName not found.")
-            continue
+        for item in mycontacts:
+            if item.get_name() == search:
+                search = item
+                pass
+            
+            if mycontacts.index(item) == -1:
+                print("Name not found.")
+                name_found = False
         
-        print(f"Name: {search}")
-        print(f"Phone Number: {mycontacts[search][0]}")
-        print(f"Email: {mycontacts[search][1]}")
+        if name_found:
+            print(f"Name: {search.get_name()}")
+            print(f"Phone Number: {search.get_phone()}")
+            print(f"Email: {search.get_email()}")
         
-        if input("Would you like to continue? (y/n) ").lower() == 'y':
+        if input("\nWould you like to continue? (y/n) ").lower() == 'y':
             continue
         else:
             break
@@ -79,10 +96,8 @@ def add(mycontacts):
     user_name = input("Enter a name: ")
     user_phone = input("Enter a phone number: ")
     user_email = input("Enter an email: ")
-    
-    info = contact.Contact(user_name, user_phone, user_email)
-    
-    pickle.dump(info, file)
+
+    mycontacts[user_name] = user_phone, user_email
 
 def change(mycontacts):
     pass
@@ -91,4 +106,12 @@ def delete(mycontacts):
     pass
 
 def save_contacts(mycontacts):
-    pass
+    
+    file = open('contact.dat', 'wb')
+    
+    for item in mycontacts:
+        pickle.dump(item, file)
+    
+    file.close()
+    
+    print("Thank you for using our program!")
