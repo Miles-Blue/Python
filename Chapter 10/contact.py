@@ -10,15 +10,15 @@ class Contact:
     
     def set_name(self, name):
         self.__name = name
-        return f"Name updated to {self.__name}"
+        #return f"Name updated to {self.__name}"
         
     def set_phone(self, phone):
         self.__phone = phone
-        return f"Phone updated to {self.__phone}"
+        #return f"Phone updated to {self.__phone}"
     
     def set_email(self, email):
         self.__email = email
-        return f"Email updated to {self.__email}"
+        #return f"Email updated to {self.__email}"
         
     def get_name(self):
         return self.__name

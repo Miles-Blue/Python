@@ -93,17 +93,62 @@ def look_up(mycontacts):
             break
             
 def add(mycontacts):
-    user_name = input("Enter a name: ")
+    user_name = input("\nEnter a name: ")
     user_phone = input("Enter a phone number: ")
     user_email = input("Enter an email: ")
 
-    mycontacts[user_name] = user_phone, user_email
+    info = contact.Contact(user_name, user_phone, user_email)
+    
+    mycontacts.append(info)
 
 def change(mycontacts):
-    pass
+    
+    while True:
+        name_found = True
+        
+        search = input("\nEnter a contact you'd like to change: ")
+        
+        for item in mycontacts:
+            if item.get_name() == search:
+                pass
+            
+            if mycontacts.index(item) == -1:
+                print("Name not found.")
+                name_found = False
+        
+        if name_found:
+            phone = input("New Phone Number: ")
+            item.set_phone(phone)
+            
+            email = input("New Email: ")
+            item.set_email(email)
+            
+            print(f"{item.get_name()}'s info has been updated.")
+            
+            break
 
 def delete(mycontacts):
-    pass
+    
+    while True:
+        name_found = True
+        
+        search = input("\nEnter a contact you'd like to delete: ")
+        
+        for item in mycontacts:
+            if item.get_name() == search:
+                search = item
+                pass
+            
+            if mycontacts.index(item) == -1:
+                print("Name not found.")
+                name_found = False
+        
+        if name_found:
+            mycontacts.remove(search)
+            
+            print("Name successfully removed.")
+            
+            break
 
 def save_contacts(mycontacts):
     
@@ -114,4 +159,4 @@ def save_contacts(mycontacts):
     
     file.close()
     
-    print("Thank you for using our program!")
+    print("\nThank you for using our program!")
