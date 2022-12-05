@@ -6,7 +6,7 @@ class Retail:
         self.__price = price
     
     def __str__(self):
-        return f"There are {self.__units} {self.__item}(s) in stock and they ${self.__price} per unit."
+        return f"Item Description: {self.__item}\nUnits: {self.__units}\nPrice Per Unit: ${self.__price}"
     
     def set_item(self, item):
         self.__item = item
