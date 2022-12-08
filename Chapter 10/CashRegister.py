@@ -12,18 +12,24 @@ class Register:
         for item in self.__lst:
             total += item.get_price()
         
-        return total
+        return f"Your total is: ${total}"
 
     def show_cart(self):
-        for item in self.__lst:
-            print(item)
-            print()
         
         if len(self.__lst) == 0:
-            print("\nThere is nothing in your cart yet!\n")
-    
+            return False
+        
+        else:
+            for item in self.__lst:
+                print(item)
+                print()
+            
+            return True
+        
     def empty(self):
         self.__lst.clear()
         
         print("\nCart successfully cleared!\n")
     
+    def return_list(self):
+        return self.__lst

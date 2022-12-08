@@ -26,3 +26,5 @@ class Retail:
     def get_price(self):
         return self.__price
     
+    def subtract_units(self, new_units):
+        self.__units -= new_units 
