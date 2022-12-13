@@ -6,7 +6,7 @@ from discord.ext import commands
 
 from discord_slash import SlashContext, SlashCommand
 
-import random
+import random_word
 
 load_dotenv()
 
@@ -24,7 +24,6 @@ slash = SlashCommand(client)
 async def _wordle(ctx: SlashContext):
     r = randomword.RandomWords()
     new_word = r.get_random_word(
-        hasDictionaryDef='true',
         minLength=5,
         maxLength=5
     ).lower()
@@ -33,7 +32,5 @@ async def _wordle(ctx: SlashContext):
     
     def check(m):
         return m.channel == ctx.channel and m.author == ctx.author
-    
-    while True:
 
 client.run(TOKEN)
