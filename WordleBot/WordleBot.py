@@ -3,34 +3,20 @@ from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
-
-from discord_slash import SlashContext, SlashCommand
-
-import random_word
+from discord_slash import SlashCommand, SlashContext
 
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 
-client = commands.Bot(command_prefix = commands.when_mentioned_or('!'))
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=',', intents=intents)
 
-slash = SlashCommand(client)
+slash = SlashCommand(bot)
 
-@slash.slash(
-    name="wordle",
-    description="Starts a game of wordle"
-)
+@slash.slash(name = "wordle")
+async def _test(ctx: SlashContext):
+    embed = discord.Embed(title="embed test")
+    await ctx.send(content="test", embeds=[embed])
 
-async def _wordle(ctx: SlashContext):
-    r = randomword.RandomWords()
-    new_word = r.get_random_word(
-        minLength=5,
-        maxLength=5
-    ).lower()
-    
-    await ctx.send("Thanks for starting a game of wordle! Make a guess!")
-    
-    def check(m):
-        return m.channel == ctx.channel and m.author == ctx.author
-
-client.run(TOKEN)
+bot.run(TOKEN)
